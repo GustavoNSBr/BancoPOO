@@ -1,18 +1,13 @@
 package model;
 
-public class Professor {
+public class Professor extends Usuario {
     private int codigo;
-    private String nome;
     private String formacao;
-    private String endereco;
-    private String telefone;
 
-    public Professor(int codigo, String nome, String formacao, String endereco, String telefone) {
+    public Professor(int codigo, String formacao, String nome, String endereco, String telefone, String senha) {
+    	super (nome, endereco, telefone, senha);
         this.codigo = codigo;
-        this.nome = nome;
         this.formacao = formacao;
-        this.endereco = endereco;
-        this.telefone = telefone;
     }
 
     public int getCodigo() {
@@ -23,35 +18,11 @@ public class Professor {
         this.codigo = codigo;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
     public String getFormacao() {
         return formacao;
     }
 
     public void setFormacao(String formacao) {
         this.formacao = formacao;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 }

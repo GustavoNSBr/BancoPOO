@@ -2,18 +2,14 @@ package model;
 
 import java.util.Date;
 
-public class Aluno {
+public class Aluno extends Usuario {
     private int matricula;
-    private String nome;
-    private String endereco;
-    private String telefone;
     private String filiacao;
     private Date dataNascimento;
 
-    public Aluno(int matricula, String nome, String endereco, String telefone, String filiacao, Date dataNascimento) {
+    public Aluno(int matricula, String filiacao, Date dataNascimento, String nome, String endereco, String telefone, String senha) {
+    	super (nome, endereco, telefone, senha);
         this.matricula = matricula;
-        this.endereco = endereco;
-        this.telefone = telefone;
         this.filiacao = filiacao;
         this.dataNascimento = dataNascimento;
     }
@@ -23,30 +19,6 @@ public class Aluno {
     }
     public void setMatricula(int matricula) {
         this.matricula = matricula;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getEndereco() {
-        return endereco;
-    }
-
-    public void setEndereco(String endereco) {
-        this.endereco = endereco;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public void setTelefone(String telefone) {
-        this.telefone = telefone;
     }
 
     public String getFiliacao() {
