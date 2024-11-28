@@ -10,7 +10,7 @@ import java.sql.Connection;
 import model.Aluno;
 import model.Curso;
 
-public abstract class AlunoDao implements IDao<Aluno>
+public class AlunoDao implements IDao<Aluno>
 {
 	private static Connection conexao;
 	
@@ -19,7 +19,7 @@ public abstract class AlunoDao implements IDao<Aluno>
 		try
 		{	
 			String sql = "INSERT INTO usuario (filiacao_aluno, data_nascimento_aluno, fk_id_usuario)";
-			sql = sql.concat("VALUES (?, ?, ?, ?)");
+			sql = sql.concat("VALUES (?, ?, ?)");
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, aluno.getFiliacao());
