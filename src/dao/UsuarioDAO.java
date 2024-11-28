@@ -3,11 +3,14 @@ package dao;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
+import config.ConnectionBD;
+
 import java.sql.Connection;
 
 import model.Usuario;
 
-public class UsuarioDao implements IDao<Usuario>
+public class UsuarioDAO implements IDao<Usuario>
 {
 	private static Connection conexao;
 	
@@ -16,7 +19,7 @@ public class UsuarioDao implements IDao<Usuario>
 	{
 		try
 		{
-			conexao = ConexaoBanco.conectar();
+			conexao = ConnectionBD.conectar();
 			
 			if (conexao == null)
 				return false;
@@ -34,7 +37,7 @@ public class UsuarioDao implements IDao<Usuario>
 			
 			if (!ConexaoBanco.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em UsuarioDao (criar)");
+				System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (criar)");
 			}
 			
 			return linhasAfetadas > 0;
@@ -45,7 +48,7 @@ public class UsuarioDao implements IDao<Usuario>
 			
 			if (!ConexaoBanco.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em UsuarioDao (criar)");
+				System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (criar)");
 			}
 			
 			return false;
@@ -71,7 +74,7 @@ public class UsuarioDao implements IDao<Usuario>
 			
 			if (!ConexaoBanco.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em UsuarioDao (deletar)");
+				System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (deletar)");
 			}
 			
 			return linhasAfetadas > 0;
@@ -82,7 +85,7 @@ public class UsuarioDao implements IDao<Usuario>
 			
 			if (!ConexaoBanco.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em UsuarioDao (deletar)");
+				System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (deletar)");
 			}
 			
 			return false;
@@ -110,7 +113,7 @@ public class UsuarioDao implements IDao<Usuario>
 			
 			if (!ConexaoBanco.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em UsuarioDao (buscar)");
+				System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (buscar)");
 			}
 			
 			return res;
@@ -121,7 +124,7 @@ public class UsuarioDao implements IDao<Usuario>
 			
 			if (!ConexaoBanco.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em UsuarioDao (buscar)");
+				System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (buscar)");
 			}
 			
 			return false;
@@ -153,7 +156,7 @@ public class UsuarioDao implements IDao<Usuario>
 			
 			if (!ConexaoBanco.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em UsuarioDao (alterar)");
+				System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (alterar)");
 			}
 			
 			return linhasAlteradas > 0;
@@ -164,7 +167,7 @@ public class UsuarioDao implements IDao<Usuario>
 			
 			if (!ConexaoBanco.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em UsuarioDao (alterar)");
+				System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (alterar)");
 			}
 			
 			return false;
@@ -195,17 +198,17 @@ public class UsuarioDao implements IDao<Usuario>
 				res = result.getInt(1);
 			
 			if (!ConexaoBanco.desconectar(conexao))
-				System.out.println("FALHA: Conexão não fechada em UsuarioDao (buscarIdUsuario)");
+				System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (buscarIdUsuario)");
 			
 			return res;
 		}
 		catch (SQLException e)
 		{
-			System.out.println("Erro: não foi possível buscar o id do usuário (UsuarioDAo - buscarIdUsuario)");
+			System.out.println("Erro: nï¿½o foi possï¿½vel buscar o id do usuï¿½rio (UsuarioDAo - buscarIdUsuario)");
 			System.out.println(e.getMessage());
 			
 			if (!ConexaoBanco.desconectar(conexao))
-				System.out.println("FALHA: Conexão não fechada em UsuarioDao (buscarIdUsuario)");
+				System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (buscarIdUsuario)");
 			
 			return -1;
 		}
@@ -236,7 +239,7 @@ public class UsuarioDao implements IDao<Usuario>
 				
 				if (!ConexaoBanco.desconectar(conexao))
 				{
-					System.out.println("FALHA: Conexão não fechada em UsuarioDao (criar)");
+					System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (criar)");
 				}
 				
 				return senhaBanco.equals(senhaLogin);
@@ -244,7 +247,7 @@ public class UsuarioDao implements IDao<Usuario>
 
 			if (!ConexaoBanco.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em UsuarioDao (criar)");
+				System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (criar)");
 			}
 			
 			return false;
@@ -255,7 +258,7 @@ public class UsuarioDao implements IDao<Usuario>
 			
 			if (!ConexaoBanco.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em UsuarioDao (criar)");
+				System.out.println("FALHA: Conexï¿½o nï¿½o fechada em UsuarioDao (criar)");
 			}
 			
 			return false;
