@@ -10,21 +10,21 @@ import java.sql.Connection;
 import model.Aluno;
 import model.Curso;
 
-public class AlunoDao implements IDao<Aluno>
+public class CursoDao implements IDao<Curso>
 {
 	private static Connection conexao;
 	
-	public boolean criar(Aluno aluno)
+	public boolean criar(Curso curso)
 	{
 		try
 		{	
-			String sql = "INSERT INTO usuario (filiacao_aluno, data_nascimento_aluno, fk_id_usuario)";
+			String sql = "INSERT INTO curso (nome_curso, sigla_curso, fk_id_curso)";
 			sql = sql.concat("VALUES (?, ?, ?)");
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, aluno.getFiliacao());
-			ps.setDate(2, aluno.getDataNascimento());
-			ps.setInt(3, aluno.getId_usuario());
+			ps.setString(1, curso.getNome());
+			ps.setString(2, curso.getSigla());
+			ps.setInt(3, curso.getCodigo());
 			
 			
 			int linhasAfetadas = ps.executeUpdate();
@@ -33,14 +33,14 @@ public class AlunoDao implements IDao<Aluno>
 		}
 		catch (SQLException e)
 		{
-			System.out.println("Erro ao inserir aluno: " + e.getMessage());
+			System.out.println("Erro ao inserir curso: " + e.getMessage());
 			
 			return false;
 		}
 	}
-
+	
 	@Override
-	public boolean buscar(Aluno aluno)
+	public boolean buscar(Curso curso)
 	{
 		try
 		{
@@ -49,10 +49,10 @@ public class AlunoDao implements IDao<Aluno>
 			if (conexao == null)
 				return false;
 			
-			String sql = "SELECT * FROM aluno WHERE fk_id_usuario = ?";
+			String sql = "SELECT * FROM curso WHERE fk_id_curso = ?";
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setInt(1, aluno.getId_usuario());
+			ps.setInt(1, curso.getCodigo());
 			
 			ResultSet result = ps.executeQuery();
 			
@@ -60,18 +60,18 @@ public class AlunoDao implements IDao<Aluno>
 			
 			if (!ConnectionBD.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em AlunoDao (buscar)");
+				System.out.println("FALHA: Conexão não fechada em Curso (buscar)");
 			}
 			
 			return res;
 		}
 		catch (SQLException e)
 		{
-			System.out.println("Erro ao buscar aluno: " + e.getMessage());
+			System.out.println("Erro ao buscar curso: " + e.getMessage());
 			
 			if (!ConnectionBD.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em AlunoDao (buscar)");
+				System.out.println("FALHA: Conexão não fechada em CursoDao (buscar)");
 			}
 			
 			return false;
@@ -79,7 +79,7 @@ public class AlunoDao implements IDao<Aluno>
 	}
 	
 	@Override
-	public boolean deletar(Aluno aluno)
+	public boolean deletar(Curso curso)
 	{
 		try
 		{
@@ -88,27 +88,27 @@ public class AlunoDao implements IDao<Aluno>
 			if (conexao == null)
 				return false;
 			
-			String sql = "DELETE FROM aluno WHERE fk_id_usuario = ?";
+			String sql = "DELETE FROM curso WHERE fk_id_curso = ?";
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setInt(1, aluno.getId_usuario());
+			ps.setInt(1, curso.getCodigo());
 			
 			int linhasAfetadas = ps.executeUpdate();
 			
 			if (!ConnectionBD.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em AlunoDao (deletar)");
+				System.out.println("FALHA: Conexão não fechada em CursoDao (deletar)");
 			}
 			
 			return linhasAfetadas > 0;
 		}
 		catch (SQLException e)
 		{
-			System.out.println("Erro ao deletar aluno: " + e.getMessage());
+			System.out.println("Erro ao deletar curso: " + e.getMessage());
 			
 			if (!ConnectionBD.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em AlunoDao (deletar)");
+				System.out.println("FALHA: Conexão não fechada em CursoDao (deletar)");
 			}
 			
 			return false;
@@ -116,7 +116,7 @@ public class AlunoDao implements IDao<Aluno>
 	}
 	
 	@Override 
-	public boolean alterar(int id, Aluno novoAluno)
+	public boolean alterar(int id, Curso novoCurso)
 	{
 		try
 		{
@@ -125,11 +125,11 @@ public class AlunoDao implements IDao<Aluno>
 			if (conexao == null)
 				return false;
 			
-			String sql = "UPDATE aluno SET filiacao_aluno = ?, data_nascimento_aluno WHERE fk_id_usuario = ?";
+			String sql = "UPDATE curso SET nome_curso = ?, sigla_curso = ? WHERE fk_id_curso = ?";
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, novoAluno.getFiliacao());
-			ps.setDate(2, novoAluno.getDataNascimento());
+			ps.setString(1, novoCurso.getNome());
+			ps.setString(2, novoCurso.getSigla());
 			ps.setInt(3, id);
 			
 			
@@ -137,21 +137,22 @@ public class AlunoDao implements IDao<Aluno>
 			
 			if (!ConnectionBD.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em AlunoDao (criar)");
+				System.out.println("FALHA: Conexão não fechada em CursoDao (criar)");
 			}
 			
 			return linhasAlteradas > 0;
 		}
 		catch (SQLException e)
 		{
-			System.out.println("Erro ao alterar aluno: " + e.getMessage());
+			System.out.println("Erro ao alterar curso: " + e.getMessage());
 			
 			if (!ConnectionBD.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em AlunoDao (criar)");
+				System.out.println("FALHA: Conexão não fechada em CursoDao (criar)");
 			}
 			
 			return false;
 		}
 	}
+
 }
