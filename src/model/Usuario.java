@@ -6,8 +6,9 @@ public class Usuario {
     protected String endereco;
     protected String telefone;
     protected String senha;
+    protected int id_usuario;
 
-    public Usuario(String nome, String endereco, String telefone, String senha) {
+    public Usuario(int id_usuario, String nome, String endereco, String telefone, String senha) {
     	this.nome = nome;
     	this.endereco = endereco;
     	this.telefone = telefone;
@@ -16,6 +17,14 @@ public class Usuario {
 
 	public String getNome() {
 		return nome;
+	}
+
+	public int getId_usuario() {
+		return id_usuario;
+	}
+
+	public void setId_usuario(int id_Usuario) {
+		this.id_usuario = id_Usuario;
 	}
 
 	public void setNome(String nome) {

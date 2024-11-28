@@ -7,8 +7,8 @@ public class Aluno extends Usuario {
     private String filiacao;
     private Date dataNascimento;
 
-    public Aluno(int matricula, String filiacao, Date dataNascimento, String nome, String endereco, String telefone, String senha) {
-    	super (nome, endereco, telefone, senha);
+    public Aluno(int matricula, int id_usuario, String filiacao, Date dataNascimento, String nome, String endereco, String telefone, String senha) {
+    	super (id_usuario, nome, endereco, telefone, senha);
         this.matricula = matricula;
         this.filiacao = filiacao;
         this.dataNascimento = dataNascimento;
