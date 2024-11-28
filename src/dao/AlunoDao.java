@@ -18,13 +18,18 @@ public class AlunoDao implements IDao<Aluno>
 	{
 		try
 		{	
-			String sql = "INSERT INTO usuario (filiacao_aluno, data_nascimento_aluno, fk_id_usuario)";
-			sql = sql.concat("VALUES (?, ?, ?)");
+			conexao = ConnectionBD.conectar();
+			
+			if (conexao == null)
+				return false;
+			String sql = "INSERT INTO aluno (filiacao_aluno, data_nascimento_aluno, fk_id_usuario, fk_id_curso)";
+			sql = sql.concat("VALUES (?, ?, ?, ?)");
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, aluno.getFiliacao());
+			ps.setDate(1, aluno.getFiliacao());
 			ps.setDate(2, aluno.getDataNascimento());
 			ps.setInt(3, aluno.getId_usuario());
+			ps.setInt(4, aluno.getCurso().getCodigo());
 			
 			
 			int linhasAfetadas = ps.executeUpdate();
@@ -125,19 +130,20 @@ public class AlunoDao implements IDao<Aluno>
 			if (conexao == null)
 				return false;
 			
-			String sql = "UPDATE aluno SET filiacao_aluno = ?, data_nascimento_aluno WHERE fk_id_usuario = ?";
+			String sql = "UPDATE aluno SET filiacao_aluno = ?, data_nascimento_aluno = ?, fk_id_curso = ? WHERE fk_id_usuario = ?";
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, novoAluno.getFiliacao());
+			ps.setDate(1, novoAluno.getFiliacao());
 			ps.setDate(2, novoAluno.getDataNascimento());
-			ps.setInt(3, id);
+			ps.setInt(3, novoAluno.getCurso().getCodigo());
+			ps.setInt(4, id);
 			
 			
 			int linhasAlteradas = ps.executeUpdate();
 			
 			if (!ConnectionBD.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em AlunoDao (criar)");
+				System.out.println("FALHA: Conexão não fechada em AlunoDao (alterar)");
 			}
 			
 			return linhasAlteradas > 0;
@@ -148,7 +154,7 @@ public class AlunoDao implements IDao<Aluno>
 			
 			if (!ConnectionBD.desconectar(conexao))
 			{
-				System.out.println("FALHA: Conexão não fechada em AlunoDao (criar)");
+				System.out.println("FALHA: Conexão não fechada em AlunoDao (alterar)");
 			}
 			
 			return false;

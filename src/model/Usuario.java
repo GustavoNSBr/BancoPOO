@@ -2,18 +2,30 @@ package model;
 
 public class Usuario {
 	
+	protected int id_usuario;
 	protected String nome;
+	protected String cpf_usuario;
     protected String endereco;
     protected String telefone;
     protected String senha;
-    protected int id_usuario;
 
-    public Usuario(int id_usuario, String nome, String endereco, String telefone, String senha) {
+    public Usuario(int id_usuario, String nome, String cpf_usuario, String endereco, String telefone, String senha) {
+    	this.id_usuario = id_usuario;
     	this.nome = nome;
+    	this.cpf_usuario = cpf_usuario;
     	this.endereco = endereco;
     	this.telefone = telefone;
     	this.senha = senha;
     }
+
+	public String getCpf_usuario() {
+		return cpf_usuario;
+	}
+
+	public void setCpf_usuario(String cpf_usuario) {
+		this.cpf_usuario = cpf_usuario;
+	}
+
 
 	public String getNome() {
 		return nome;

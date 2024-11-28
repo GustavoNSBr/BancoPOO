@@ -17,7 +17,11 @@ public class DisciplinaDao implements IDao<Disciplina>
 	{
 		try
 		{	
-			String sql = "INSERT INTO usuario (denominacao_disciplina, sigla_disciplina, ementa_disciplina, fk_id_departamento)";
+			conexao = ConnectionBD.conectar();
+			
+			if (conexao == null)
+				return false;
+			String sql = "INSERT INTO disciplina (denominacao_disciplina, sigla_disciplina, ementa_disciplina, fk_id_departamento)";
 			sql = sql.concat("VALUES (?, ?, ?, ?)");
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
