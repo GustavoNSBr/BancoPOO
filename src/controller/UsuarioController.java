@@ -7,7 +7,7 @@ import model.Usuario;
 public class UsuarioController {
 
 	
-	public Resposta cadastrarEndereco(Usuario usuario) {
+	public Resposta cadastrarUsuario(Usuario usuario) {
 		
 		UsuarioDAO userDAO = new UsuarioDAO();
 		Resposta res = new Resposta();
