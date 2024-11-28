@@ -4,7 +4,7 @@ public class Professor extends Usuario {
     private int codigo;
     private String formacao;
 
-    public Professor(int id_usuario, int codigo, String cpf_usuario, String formacao, String nome, String endereco, String telefone, String senha) {
+    public Professor(int id_usuario, String telefone, String cpf_usuario, String formacao, String nome, String endereco, int codigo, String senha) {
     	super (id_usuario, nome, cpf_usuario, endereco, telefone, senha);
         this.codigo = codigo;
         this.formacao = formacao;

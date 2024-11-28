@@ -31,6 +31,12 @@ public class ProfessorController  {
 			return res;
 		}
 		
+		if(professor.getCpf_usuario().length() < 11 || professor.getCpf_usuario().length() > 15)
+		{
+			res.setMensagem("Cpf é menor que 11 caracteres ou maior que 15 caracteres");
+			return res;
+		}
+		
 		if (professor.getSenha().length() > 20 || professor.getSenha().length() < 4)
 		{
 			res.setMensagem("Senha é menor que 4 caracteres ou maior que 50 caracteres");
@@ -76,17 +82,19 @@ public class ProfessorController  {
         	System.out.println("Não foi possível criar um usuário");
         	res.setMensagem("Não foi possível criar usuário");
         	return res;
+        } else {
+        
+        	System.out.println("Usuario criado com sucesso");
+        	int id = usuarioDao.buscarIdUsuario(usuario);
+        
+        	if (id == -1)
+        	{
+        		res.setMensagem("Não foi possível encontrar o id do usuário criado");
+        		return res;
+        	}
+        
+        	professor.setId_usuario(id);
         }
-        
-        int id = usuarioDao.buscarIdUsuario(usuario);
-        
-        if (id == -1)
-        {
-        	res.setMensagem("Não foi possível encontrar o id do usuário criado");
-        	return res;
-        }
-        
-        professor.setId_usuario(id);
         
         if (!profDao.criar(professor))
 		{
@@ -97,11 +105,13 @@ public class ProfessorController  {
         	
         	res.setMensagem("Não foi possível criar professor");
         	return res;
-		}
+		} else {
         
-        professor.setId_usuario(usuarioDao.buscarIdUsuario(usuario));
-        res.setOk(true);
-        return res;
+			System.out.println("Professor criado com sucesso");
+			professor.setId_usuario(usuarioDao.buscarIdUsuario(usuario));
+			res.setOk(true);
+        	return res;
+		}
     }
 
     public Resposta buscarProfessor(Professor professor) {
@@ -128,7 +138,7 @@ public class ProfessorController  {
         if (!profDao.buscar(professor))
 		{
         	
-        	res.setMensagem("Não foi possível encontrar professor");
+        	res.setMensagem("Não foi possível encontrar o professor");
         	return res;
 		}
         
@@ -163,6 +173,7 @@ public class ProfessorController  {
         }
         
         usuarioDao.deletar(professor);
+        System.out.println("Professor deletado com sucesso");
         res.setOk(true);
         return res;
     }
@@ -175,25 +186,16 @@ public class ProfessorController  {
         
         Resposta res = new Resposta();
         
-        UsuarioDAO usuarioDao = new UsuarioDAO();
-        
-        int idNovo = usuarioDao.buscarIdUsuario(novoProfessor);
-        
-        if (idNovo == -1)
-        {
-        	res.setMensagem("Não foi possível encontrar o usuário");
-        	return res;
-        }
-        
-        novoProfessor.setId_usuario(idNovo);
+        ProfessorDAO professorDao = new ProfessorDAO();
+
        
-        if(!profDao.deletar(novoProfessor))
+        if(!professorDao.alterar(id, novoProfessor))
         {
-        	res.setMensagem("Não foi possível deletar o professor");
+        	res.setMensagem("Não foi possível alterar o professor");
         	return res;
         }
         
-        usuarioDao.deletar(novoProfessor);
+        System.out.println("Professor alterado com sucesso");
         res.setOk(true);
         return res;
     }

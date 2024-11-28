@@ -1,13 +1,22 @@
 package model;
 
 public class Curso {
+	
     private int codigo;
-    private String nome;
-    private String sigla;
+	private NomeCurso curso;
+	private SiglaCurso sigla;
+    public enum NomeCurso{
+    	EnsinoMedio,
+    	EnsinoFundamental
+    }
+    public enum SiglaCurso{
+    	EM,
+    	EF
+    }
 
-    public Curso(int codigo, String nome, String sigla) {
+    public Curso(int codigo, NomeCurso curso, SiglaCurso sigla) {
         this.codigo = codigo;
-        this.nome = nome;
+        this.curso = curso;
         this.sigla = sigla;
     }
 
@@ -19,19 +28,21 @@ public class Curso {
         this.codigo = codigo;
     }
 
-    public String getNome() {
-        return nome;
-    }
+	public NomeCurso getCurso() {
+		return curso;
+	}
 
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
+	public void setCurso(NomeCurso curso) {
+		this.curso = curso;
+	}
 
-    public String getSigla() {
-        return sigla;
-    }
+	public SiglaCurso getSigla() {
+		return sigla;
+	}
 
-    public void setSigla(String sigla) {
-        this.sigla = sigla;
-    }
+	public void setSigla(SiglaCurso sigla) {
+		this.sigla = sigla;
+	}
+
+    
 }

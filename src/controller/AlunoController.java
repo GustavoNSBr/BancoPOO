@@ -34,6 +34,12 @@ public class AlunoController  {
 			return res;
 		}
 		
+		if(aluno.getCpf_usuario().length() < 11 || aluno.getCpf_usuario().length() > 15)
+		{
+			res.setMensagem("Cpf é menor que 11 caracteres ou maior que 15 caracteres");
+			return res;
+		}
+		
 		if (aluno.getSenha().length() > 20 || aluno.getSenha().length() < 4)
 		{
 			res.setMensagem("Senha é menor que 4 caracteres ou maior que 50 caracteres");
@@ -149,7 +155,7 @@ public class AlunoController  {
         	res.setMensagem("Não foi possível encontrar aluno");
         	return res;
 		}
-        
+    
         res.setOk(true);
         return res;
     }
@@ -181,37 +187,29 @@ public class AlunoController  {
         }
         
         usuarioDao.deletar(aluno);
+        System.out.println("Aluno deletado com sucesso");
         res.setOk(true);
         return res;
     }
 
     public Resposta alterarAluno(int id, Aluno novoAluno) {
-        Resposta validacao = validarAluno(novoAluno);
+    	Resposta validacao = validarAluno(novoAluno);
         
         if (!validacao.isOk())
         	return validacao;
         
         Resposta res = new Resposta();
         
-        UsuarioDAO usuarioDao = new UsuarioDAO();
-        
-        int idNovo = usuarioDao.buscarIdUsuario(novoAluno);
-        
-        if (idNovo == -1)
-        {
-        	res.setMensagem("Não foi possível encontrar o usuário");
-        	return res;
-        }
-        
-        novoAluno.setId_usuario(idNovo);
+        AlunoDao alunoDao = new AlunoDao();
+
        
-        if(!alunoDao.deletar(novoAluno))
+        if(!alunoDao.alterar(id, novoAluno))
         {
-        	res.setMensagem("Não foi possível deletar o aluno");
+        	res.setMensagem("Não foi possível alterar o aluno");
         	return res;
         }
         
-        usuarioDao.deletar(novoAluno);
+        System.out.println("Aluno alterado com sucesso");
         res.setOk(true);
         return res;
     }
