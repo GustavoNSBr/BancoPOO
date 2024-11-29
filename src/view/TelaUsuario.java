@@ -42,6 +42,7 @@ public class TelaUsuario extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaUsuario() {
+		setTitle("Tela Usuario");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 360);
 		contentPane = new JPanel();

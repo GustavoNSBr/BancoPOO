@@ -48,6 +48,7 @@ public class TelaInicial extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaInicial() {
+		setTitle("Tela Inicial");
 		setAlwaysOnTop(true);
 		setBackground(new Color(0, 0, 255));
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -77,11 +78,15 @@ public class TelaInicial extends JFrame {
 		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		txtCPF = new JTextField();
+		txtCPF.setFont(new Font("Arial", Font.PLAIN, 12));
+		txtCPF.setForeground(new Color(182, 182, 182));
 		txtCPF.setToolTipText("");
 		txtCPF.setText("CPF");
 		txtCPF.setColumns(10);
 		
 		txtSenha = new JTextField();
+		txtSenha.setForeground(new Color(182, 182, 182));
+		txtSenha.setFont(new Font("Arial", Font.PLAIN, 12));
 		txtSenha.setText("Senha");
 		txtSenha.setColumns(10);
 		
