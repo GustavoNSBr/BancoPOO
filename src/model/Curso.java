@@ -19,6 +19,10 @@ public class Curso {
         this.curso = curso;
         this.sigla = sigla;
     }
+    
+    public Curso() {
+    	
+    }
 
     public int getCodigo() {
         return codigo;

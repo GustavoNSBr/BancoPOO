@@ -89,9 +89,12 @@ public class Login extends JFrame {
 				Usuario usuario = new Usuario(textField.getText(), passwordField.getText());
 				UsuarioDAO userDao = new UsuarioDAO();
 				if(userDao.logarUsuario(usuario))
-				{
+				{	
 					if(userDao.getTipoUsuario(usuario) == TipoUsuario.ALUNO) {
-						
+						Janela login = new Janela("Login");
+						login.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						login.setSize(310,600);
+						login.setVisible(true);
 					}
 					
 				}

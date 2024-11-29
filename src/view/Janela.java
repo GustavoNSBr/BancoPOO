@@ -77,7 +77,7 @@ public class Janela extends JFrame
 		bg.add(profRadioButton);
 		bg.add(estRadioButton);
 
-		String[] cursos = {"Engenharia de Software", "Sistemas de Informação", "Análise de Desenvolvimento de Software", "Ciência da Computação", "Gestão da Tecnologia da Informação", "Matemática", "Física", "Enfermagem", "Medicina", "Medicina Veterinária"};
+		String[] cursos = {"Ensino Fundamental", "Ensino Médio"};
 		comboBox = new JComboBox<String>(cursos);
 		comboBox.setMaximumRowCount(3);
 
