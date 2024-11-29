@@ -8,6 +8,7 @@ import config.ConnectionBD;
 
 import java.sql.Connection;
 
+import model.TipoUsuario;
 import model.Usuario;
 
 public class UsuarioDAO implements IDao<Usuario>
@@ -172,7 +173,7 @@ public class UsuarioDAO implements IDao<Usuario>
 	}
 	
 	
-	public boolean logarUsuario(Usuario usuario, String senhaLogin)
+	public boolean logarUsuario(Usuario usuario)
 	{
 		try
 		{
@@ -181,26 +182,28 @@ public class UsuarioDAO implements IDao<Usuario>
 			if (conexao == null)
 				return false;
 			
-			String sql = "select senha from usuario where nome_usuario = ?";
+			String sql = "select senha from usuario where cpf_usuario = ?";
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, usuario.getNome());
+			ps.setString(1, usuario.getCpf_usuario());
 			
 			ResultSet linha = ps.executeQuery();
 			
-			if (linha.next())
-			{
-				String senhaBanco = linha.getString("senha");
-				
-				System.out.println(senhaBanco);
-				
-				if (!ConnectionBD.desconectar(conexao))
-				{
-					System.out.println("FALHA: Conexao nao fechada em UsuarioDao (logar)");
-				}
-				
-				return senhaBanco.equals(senhaLogin);
-			}
+			if (linha.next()) {
+	           
+	            String senhaBanco = linha.getString("senha").trim();
+	            String senhaUsuario = usuario.getSenha().trim();
+	            
+	            if (senhaBanco.equals(senhaUsuario)) {
+	                System.out.println("Usuario logado com sucesso");
+	                return true;
+	            } else {
+	                System.out.println("Senha incorreta");
+	            }
+	        } else {
+	           
+	            System.out.println("CPF não encontrado");
+	        }
 
 			if (!ConnectionBD.desconectar(conexao))
 			{
@@ -220,6 +223,42 @@ public class UsuarioDAO implements IDao<Usuario>
 			
 			return false;
 		}
+	}
+	
+	public TipoUsuario getTipoUsuario(Usuario usuario) {
+	    
+	    TipoUsuario tipoUsuario = null;
+
+	    try {
+	        conexao = ConnectionBD.conectar();
+	        
+	        if (conexao == null) {
+	            return null; 
+	        }
+	        
+	        String sql = "SELECT tipo_usuario FROM usuario WHERE cpf_usuario = ?";
+	        PreparedStatement ps = conexao.prepareStatement(sql);
+	        ps.setString(1, usuario.getCpf_usuario());
+	        
+	        ResultSet linha = ps.executeQuery();
+	        
+	        if (linha.next()) {
+	            String tipoString = linha.getString("tipo_usuario");
+	            tipoUsuario = TipoUsuario.valueOf(tipoString); 
+	        } else {
+	            System.out.println("CPF não encontrado");
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Erro ao buscar tipo de usuario: " + e.getMessage());
+	    } catch (IllegalArgumentException e) {
+	        System.out.println("Tipo de usuário inválido: " + e.getMessage());
+	    } finally {
+	        if (conexao != null) {
+	            ConnectionBD.desconectar(conexao);
+	        }
+	    }
+	    
+	    return tipoUsuario; // Retorna o tipo de usuário ou null se não encontrado
 	}
 	
 	public int buscarIdUsuario(Usuario usuario)
