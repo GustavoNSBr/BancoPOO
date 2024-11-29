@@ -1,6 +1,7 @@
 package controller;
 
 import java.sql.Date;
+import java.sql.SQLException;
 import java.time.LocalDate;
 
 import dao.*;
@@ -11,7 +12,7 @@ public class AlunoController  {
 
     private AlunoDao alunoDao;
 
-    public AlunoController() {
+    public AlunoController() throws SQLException{
         this.alunoDao = new AlunoDao();
     }
 

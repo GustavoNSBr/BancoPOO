@@ -1,5 +1,7 @@
 package controller;
 
+import java.sql.SQLException;
+
 import dao.*;
 
 import model.*;
@@ -8,7 +10,7 @@ public class ProfessorController  {
 
     private ProfessorDAO profDao;
 
-    public ProfessorController() {
+    public ProfessorController() throws SQLException{
         this.profDao = new ProfessorDAO();
     }
 
