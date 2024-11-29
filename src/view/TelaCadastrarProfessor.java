@@ -17,7 +17,7 @@ import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
 
-public class TelaCadastrarAluno extends JFrame {
+public class TelaCadastrarProfessor extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -26,8 +26,8 @@ public class TelaCadastrarAluno extends JFrame {
 	private JTextField telefone_usuario;
 	private JTextField senha;
 	private JTextField cpf_usuario;
-	private JTextField filiacao_aluno;
-	private JTextField data_nacsimento_aluno;
+	private JTextField formacao_professor;
+	private JTextField denominacao_departamento;
 
 	/**
 	 * Launch the application.
@@ -36,7 +36,7 @@ public class TelaCadastrarAluno extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaCadastrarAluno frame = new TelaCadastrarAluno();
+					TelaCadastrarProfessor frame = new TelaCadastrarProfessor();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -48,7 +48,7 @@ public class TelaCadastrarAluno extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastrarAluno() {
+	public TelaCadastrarProfessor() {
 		setTitle("Tela Cadastro Aluno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 600);
@@ -60,7 +60,7 @@ public class TelaCadastrarAluno extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Gustavo Nunes\\Desktop\\BancoPOO\\estutanteTela.png"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Gustavo Nunes\\Desktop\\BancoPOO\\professorTela.png"));
 		
 		JLabel lblNewLabel_1 = new JLabel("Cadastro de novo aluno");
 		lblNewLabel_1.setBackground(new Color(255, 255, 255));
@@ -112,23 +112,23 @@ public class TelaCadastrarAluno extends JFrame {
 		cpf_usuario.setText("CPF");
 		cpf_usuario.setColumns(10);
 		
-		JLabel lblNewLabel_7 = new JLabel("Digite a data de filiacao do Aluno:");
+		JLabel lblNewLabel_7 = new JLabel("Digite a Formacao:");
 		lblNewLabel_7.setFont(new Font("Arial", Font.BOLD, 12));
 		
-		filiacao_aluno = new JTextField();
-		filiacao_aluno.setForeground(new Color(182, 182, 182));
-		filiacao_aluno.setFont(new Font("Arial", Font.PLAIN, 12));
-		filiacao_aluno.setText("Data Filiacao");
-		filiacao_aluno.setColumns(10);
+		formacao_professor = new JTextField();
+		formacao_professor.setForeground(new Color(182, 182, 182));
+		formacao_professor.setFont(new Font("Arial", Font.PLAIN, 12));
+		formacao_professor.setText("Formacao");
+		formacao_professor.setColumns(10);
 		
-		JLabel lblNewLabel_8 = new JLabel("Data de nascimento:");
+		JLabel lblNewLabel_8 = new JLabel("Digite o Departamento:");
 		lblNewLabel_8.setFont(new Font("Arial", Font.BOLD, 12));
 		
-		data_nacsimento_aluno = new JTextField();
-		data_nacsimento_aluno.setForeground(new Color(182, 182, 182));
-		data_nacsimento_aluno.setFont(new Font("Arial", Font.PLAIN, 12));
-		data_nacsimento_aluno.setText("Data Nacimento");
-		data_nacsimento_aluno.setColumns(10);
+		denominacao_departamento = new JTextField();
+		denominacao_departamento.setForeground(new Color(182, 182, 182));
+		denominacao_departamento.setFont(new Font("Arial", Font.PLAIN, 12));
+		denominacao_departamento.setText("Departamento");
+		denominacao_departamento.setColumns(10);
 		
 		JButton btnNewButton = new JButton("CADASTRAR");
 		btnNewButton.setBackground(new Color(0, 0, 128));
@@ -157,9 +157,9 @@ public class TelaCadastrarAluno extends JFrame {
 						.addComponent(lblNewLabel_6, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
 						.addComponent(cpf_usuario, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
-						.addComponent(filiacao_aluno, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
+						.addComponent(formacao_professor, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_8, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
-						.addComponent(data_nacsimento_aluno, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE))
+						.addComponent(denominacao_departamento, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 				.addGroup(Alignment.TRAILING, gl_contentPane.createSequentialGroup()
 					.addContainerGap(139, Short.MAX_VALUE)
@@ -197,11 +197,11 @@ public class TelaCadastrarAluno extends JFrame {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(filiacao_aluno, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
+					.addComponent(formacao_professor, GroupLayout.PREFERRED_SIZE, 19, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblNewLabel_8, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(data_nacsimento_aluno, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
+					.addComponent(denominacao_departamento, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
 					.addGap(41)
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 					.addContainerGap(63, Short.MAX_VALUE))

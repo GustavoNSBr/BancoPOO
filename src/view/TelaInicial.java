@@ -75,7 +75,7 @@ public class TelaInicial extends JFrame {
 		
 		JLabel lblNewLabel_1 = new JLabel("LOGIN");
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
-		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 16));
+		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 18));
 		
 		txtCPF = new JTextField();
 		txtCPF.setFont(new Font("Arial", Font.PLAIN, 12));
@@ -91,7 +91,7 @@ public class TelaInicial extends JFrame {
 		txtSenha.setColumns(10);
 		
 		JButton btnEntrar = new JButton("ENTRAR");
-		btnEntrar.setBackground(new Color(240, 240, 240));
+		btnEntrar.setBackground(new Color(255, 255, 255));
 		btnEntrar.setFont(new Font("Arial", Font.BOLD, 18));
 		btnEntrar.setForeground(new Color(0, 0, 255));
 		btnEntrar.addActionListener(new ActionListener() {

@@ -52,6 +52,8 @@ public class TelaUsuario extends JFrame {
 		setContentPane(contentPane);
 		
 		JButton btnCadastrarProfessor = new JButton("PROFESSOR");
+		btnCadastrarProfessor.setBackground(new Color(0, 0, 128));
+		btnCadastrarProfessor.setForeground(new Color(255, 255, 255));
 		btnCadastrarProfessor.setFont(new Font("Arial", Font.BOLD, 16));
 		btnCadastrarProfessor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -59,6 +61,8 @@ public class TelaUsuario extends JFrame {
 		});
 		
 		JButton btnCadastrarAluno = new JButton("ESTUDANTE");
+		btnCadastrarAluno.setBackground(new Color(0, 0, 128));
+		btnCadastrarAluno.setForeground(new Color(255, 255, 255));
 		btnCadastrarAluno.setFont(new Font("Arial", Font.BOLD, 16));
 		
 		JLabel lblNewLabel = new JLabel("");
