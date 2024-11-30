@@ -32,7 +32,7 @@ import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.DefaultComboBoxModel;
 
-public class TelaCadastrarAluno extends JFrame {
+public class TelaAlterarAluno extends JFrame {
 
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
@@ -51,7 +51,7 @@ public class TelaCadastrarAluno extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					TelaCadastrarAluno frame = new TelaCadastrarAluno();
+					TelaAlterarAluno frame = new TelaAlterarAluno();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -63,7 +63,7 @@ public class TelaCadastrarAluno extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaCadastrarAluno() {
+	public TelaAlterarAluno() {
 		setTitle("Tela Cadastro Aluno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 600);
@@ -77,7 +77,7 @@ public class TelaCadastrarAluno extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Gustavo Nunes\\Desktop\\BancoPOO\\estutanteTela.png"));
 		
-		JLabel lblNewLabel_1 = new JLabel("Cadastro de novo aluno");
+		JLabel lblNewLabel_1 = new JLabel("Alterar aluno");
 		lblNewLabel_1.setBackground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 18));
 		
@@ -152,7 +152,7 @@ public class TelaCadastrarAluno extends JFrame {
 		JLabel lblNewLabel_2_1 = new JLabel("Selecione o curso:");
 		lblNewLabel_2_1.setFont(new Font("Arial", Font.BOLD, 12));
 		
-		JButton btnNewButton = new JButton("CADASTRAR");
+		JButton btnNewButton = new JButton("ALTERAR");
 		btnNewButton.setBackground(new Color(0, 0, 128));
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setFont(new Font("Arial", Font.BOLD, 18));

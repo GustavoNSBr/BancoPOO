@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
 import javax.swing.JTable;
+import javax.swing.JButton;
 
 public class TelaAluno extends JFrame {
 
@@ -70,6 +71,15 @@ public class TelaAluno extends JFrame {
 		
 		JLabel lblNewLabel_4 = new JLabel("coloquei uma tabela para as materias");
 		lblNewLabel_4.setForeground(new Color(255, 0, 0));
+		
+		JButton btnNewButton = new JButton("DELETAR USUARIO");
+		btnNewButton.setForeground(new Color(0, 0, 55));
+		btnNewButton.setFont(new Font("Arial", Font.BOLD, 8));
+		btnNewButton.setBackground(new Color(255, 255, 255));
+		
+		JButton btnNewButton_1 = new JButton("ALTERAR USUARIO");
+		btnNewButton_1.setForeground(new Color(0, 0, 55));
+		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 12));
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -83,7 +93,12 @@ public class TelaAluno extends JFrame {
 								.addComponent(lblNewLabel_3, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 							.addPreferredGap(ComponentPlacement.RELATED, 192, Short.MAX_VALUE)
 							.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 82, GroupLayout.PREFERRED_SIZE))
-						.addComponent(table, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(table, GroupLayout.PREFERRED_SIZE, 192, GroupLayout.PREFERRED_SIZE)
+							.addPreferredGap(ComponentPlacement.RELATED, 171, Short.MAX_VALUE)
+							.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+								.addComponent(btnNewButton)
+								.addComponent(btnNewButton_1)))
 						.addComponent(lblNewLabel_4, GroupLayout.PREFERRED_SIZE, 220, GroupLayout.PREFERRED_SIZE))
 					.addContainerGap())
 		);
@@ -100,9 +115,15 @@ public class TelaAluno extends JFrame {
 							.addComponent(lblNewLabel_2, GroupLayout.PREFERRED_SIZE, 17, GroupLayout.PREFERRED_SIZE))
 						.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 74, GroupLayout.PREFERRED_SIZE))
 					.addPreferredGap(ComponentPlacement.RELATED, 16, Short.MAX_VALUE)
-					.addComponent(lblNewLabel_4)
-					.addPreferredGap(ComponentPlacement.UNRELATED)
-					.addComponent(table, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE)
+					.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING)
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(lblNewLabel_4)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(table, GroupLayout.PREFERRED_SIZE, 149, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addComponent(btnNewButton_1)
+							.addPreferredGap(ComponentPlacement.UNRELATED)
+							.addComponent(btnNewButton)))
 					.addGap(28))
 		);
 		contentPane.setLayout(gl_contentPane);
