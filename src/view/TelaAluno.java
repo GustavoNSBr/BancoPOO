@@ -79,7 +79,7 @@ public class TelaAluno extends JFrame {
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
-		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Gustavo Nunes\\Desktop\\BancoPOO\\estutanteTela.png"));
+		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\crisb\\OneDrive\\Área de Trabalho\\Programação\\Projeto POO\\BancoPOO\\estutanteTela.png"));
 		
 		JLabel lblNewLabel_1 = new JLabel("Bem vindo, " + usuario.getNome());
 		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 16));
