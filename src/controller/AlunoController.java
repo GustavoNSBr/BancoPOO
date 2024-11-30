@@ -29,7 +29,7 @@ public class AlunoController  {
 		}
 		
 		int tamanhoNome = aluno.getNome().length();
-		if (tamanhoNome > 100 )
+		if (tamanhoNome > 100 || tamanhoNome <= 0)
 		{
 			res.setMensagem("Nome é inválido");
 			return res;

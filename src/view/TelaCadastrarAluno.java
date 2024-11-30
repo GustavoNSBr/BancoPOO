@@ -181,10 +181,12 @@ public class TelaCadastrarAluno extends JFrame {
 				try {
 					AlunoController alunoCont = new AlunoController();
 					alunoCont.cadastrarAluno(aluno);
+					System.out.println(alunoCont.buscarAluno(aluno).getMensagem());
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}	
+				
 				
 			}
 		});
