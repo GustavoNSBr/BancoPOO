@@ -24,6 +24,10 @@ public class Usuario {
     	this.senha = senha;
     }
 
+	public Usuario() {
+		
+	}
+
 	public String getCpf_usuario() {
 		return cpf_usuario;
 	}

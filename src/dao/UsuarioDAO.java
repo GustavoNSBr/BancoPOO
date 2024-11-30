@@ -174,57 +174,85 @@ public class UsuarioDAO implements IDao<Usuario>
 		}
 	}
 	
+	public Usuario getDadosUsuario(String cpf) {
+	    Usuario usuario = null;
+
+	    try {
+	        conexao = ConnectionBD.conectar();
+	        if (conexao == null) 
+	        	return null;
+
+	        String sql = "SELECT * FROM usuario WHERE cpf_usuario = ?";
+	        PreparedStatement ps = conexao.prepareStatement(sql);
+	        ps.setString(1, cpf);
+	        
+	        ResultSet rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	            usuario = new Usuario(
+	                rs.getInt("id_usuario"),
+	                rs.getString("nome_usuario"),
+	                rs.getString("cpf_usuario"),
+	                rs.getString("endereco_usuario"),
+	                rs.getString("telefone_usuario"),
+	                rs.getString("senha")
+	            );
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Erro ao buscar detalhes do usuario: " + e.getMessage());
+	    } finally {
+	        if (conexao != null) {
+	            ConnectionBD.desconectar(conexao);
+	        }
+	    }
+	    return usuario;
+	}
 	
-	public boolean logarUsuario(Usuario usuario)
-	{
-		try
-		{
-			conexao = ConnectionBD.conectar();
-			
-			if (conexao == null)
-				return false;
-			
-			String sql = "select senha from usuario where cpf_usuario = ?";
-			
-			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, usuario.getCpf_usuario());
-			
-			ResultSet linha = ps.executeQuery();
-			
-			if (linha.next()) {
-	           
+	
+	public Usuario logarUsuario(Usuario usuario) {
+	    try {
+	        conexao = ConnectionBD.conectar();
+	        
+	        if (conexao == null)
+	            return null;
+	        
+	        String sql = "SELECT senha FROM usuario WHERE cpf_usuario = ?";
+	        
+	        PreparedStatement ps = conexao.prepareStatement(sql);
+	        ps.setString(1, usuario.getCpf_usuario());
+	        
+	        ResultSet linha = ps.executeQuery();
+	        
+	        if (linha.next()) {
 	            String senhaBanco = linha.getString("senha").trim();
 	            String senhaUsuario = usuario.getSenha().trim();
 	            
 	            if (senhaBanco.equals(senhaUsuario)) {
-	                System.out.println("Usuario logado com sucesso");
-	                return true;
+	                System.out.println("Usuário logado com sucesso");
+	                
+	                usuario = getDadosUsuario(usuario.getCpf_usuario());
+	                return usuario; 
 	            } else {
 	                System.out.println("Senha incorreta");
 	            }
 	        } else {
-	           
 	            System.out.println("CPF não encontrado");
 	        }
 
-			if (!ConnectionBD.desconectar(conexao))
-			{
-				System.out.println("FALHA: Conexao nao fechada em UsuarioDao (logar)");
-			}
-			
-			return false;
-		}
-		catch (SQLException e)
-		{
-			System.out.println("Erro ao logar usuario: " + e.getMessage());
-			
-			if (!ConnectionBD.desconectar(conexao))
-			{
-				System.out.println("FALHA: Conexao nao fechada em UsuarioDao (logar)");
-			}
-			
-			return false;
-		}
+	        if (!ConnectionBD.desconectar(conexao)) {
+	            System.out.println("FALHA: Conexão não fechada em UsuarioDao (logar)");
+	        }
+	        
+	        return null; // Retorna null se não logou
+	    } catch (SQLException e) {
+	        System.out.println("Erro ao logar usuario: " + e.getMessage());
+	        
+	        if (!ConnectionBD.desconectar(conexao)) {
+	            System.out.println("FALHA: Conexão não fechada em UsuarioDao (logar)");
+	        }
+	        
+	        return null; // Retorna null em caso de erro
+	    }
 	}
 	
 	public TipoUsuario getTipoUsuario(Usuario usuario) {
@@ -302,4 +330,5 @@ public class UsuarioDAO implements IDao<Usuario>
 			return -1;
 		}
 	}
+	
 }

@@ -1,11 +1,14 @@
 package model;
 import java.sql.Date;
 
+import model.Curso.NomeCurso;
+
 public class Aluno extends Usuario {
     private int matricula;
     private Date filiacao;
     private Date dataNascimento;
     private Curso curso;
+    private int idCurso;
 
     public Aluno(int matricula, String cpf_usuario, int id_usuario, Date filiacao, Date dataNascimento, String nome, String endereco, String telefone, String senha, Curso curso) {
     	super (id_usuario, nome, cpf_usuario, endereco, telefone, senha);
@@ -15,7 +18,23 @@ public class Aluno extends Usuario {
         this.curso = curso;
     }
     
-    public Curso getCurso() {
+    public Aluno(int matricula, Date filiacao, Date dataNascimento, int idCurso) {
+        this.matricula = matricula;
+        this.filiacao = filiacao;
+        this.dataNascimento = dataNascimento;
+        this.idCurso = idCurso;
+    }
+    
+    
+    public int getIdCurso() {
+		return idCurso;
+	}
+
+	public void setIdCurso(int idCurso) {
+		this.idCurso = idCurso;
+	}
+
+	public Curso getCurso() {
 		return curso;
 	}
 

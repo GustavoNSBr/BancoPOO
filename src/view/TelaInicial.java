@@ -6,7 +6,9 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import dao.AlunoDao;
 import dao.UsuarioDAO;
+import model.Aluno;
 import model.TipoUsuario;
 import model.Usuario;
 
@@ -111,25 +113,29 @@ public class TelaInicial extends JFrame {
 			
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				Usuario usuario = new Usuario(txtCPF.getText(), txtSenha.getText());
-				UsuarioDAO userDao = new UsuarioDAO();
-				if(userDao.logarUsuario(usuario))
-				{	
-					if(userDao.getTipoUsuario(usuario) == TipoUsuario.ALUNO) {
-						TelaAluno telaAluno = new TelaAluno(usuario);
-						telaAluno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-						telaAluno.setVisible(true);
-						
-						dispose();
-					} else {
-						TelaProfessor telaProfessor = new TelaProfessor(usuario);
-						telaProfessor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-						telaProfessor.setVisible(true);
-						
-						dispose();
-					}
-					
-				}
+			    Usuario usuario = new Usuario(txtCPF.getText(), txtSenha.getText());
+			    UsuarioDAO userDao = new UsuarioDAO();
+			    
+			    usuario = userDao.logarUsuario(usuario);
+			    
+			    if (usuario != null) {
+			        AlunoDao alunoDao = new AlunoDao();
+			        Aluno aluno = alunoDao.getDadosAluno(usuario);
+			        
+			        if (userDao.getTipoUsuario(usuario) == TipoUsuario.ALUNO) {
+			            TelaAluno telaAluno = new TelaAluno(usuario, aluno);
+			            telaAluno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			            telaAluno.setVisible(true);
+			            dispose();
+			        } else {
+			            TelaProfessor telaProfessor = new TelaProfessor(usuario);
+			            telaProfessor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			            telaProfessor.setVisible(true);
+			            dispose();
+			        }
+			    } else {
+			        System.out.println("Falha no login.");
+			    }
 			}
 		});
 		btnEntrar.setBackground(new Color(255, 255, 255));

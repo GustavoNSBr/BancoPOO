@@ -9,6 +9,7 @@ import java.sql.Connection;
 
 import model.Aluno;
 import model.Curso;
+import model.Usuario;
 
 public class AlunoDao implements IDao<Aluno>
 {
@@ -42,6 +43,38 @@ public class AlunoDao implements IDao<Aluno>
 			
 			return false;
 		}
+	}
+	
+	public Aluno getDadosAluno(Usuario usuario) {
+
+		Aluno aluno = null;
+	    try {
+	        conexao = ConnectionBD.conectar();
+	        if (conexao == null) 
+	        	return null;
+
+	        String sql = "SELECT * FROM aluno WHERE fk_id_usuario = ?";
+	        PreparedStatement ps = conexao.prepareStatement(sql);
+	        ps.setInt(1, usuario.getId_usuario());
+	        
+	        ResultSet rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	           aluno = new Aluno(
+	                rs.getInt("matricula_aluno"),
+	                rs.getDate("filiacao_aluno"),
+	                rs.getDate("data_nascimento_aluno"),
+	                rs.getInt("fk_id_curso")
+	            );
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Erro ao buscar detalhes do aluno: " + e.getMessage());
+	    } finally {
+	        if (conexao != null) {
+	            ConnectionBD.desconectar(conexao);
+	        }
+	    }
+	    return aluno;
 	}
 
 	@Override

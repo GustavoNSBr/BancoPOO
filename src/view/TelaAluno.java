@@ -8,6 +8,7 @@ import javax.swing.border.EmptyBorder;
 
 import controller.AlunoController;
 import controller.ProfessorController;
+import dao.AlunoDao;
 import dao.UsuarioDAO;
 import model.Aluno;
 import model.Curso;
@@ -40,6 +41,7 @@ public class TelaAluno extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private Usuario usuario;
+	private Aluno aluno;
 
 	/**
 	 * Launch the application.
@@ -60,11 +62,13 @@ public class TelaAluno extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaAluno(Usuario usuario) {
+	public TelaAluno(Usuario usuario, Aluno aluno) {
 		this.usuario = usuario;
+		this.aluno = aluno;
         initialize();
 	}
 	 private void initialize() {
+		 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 360);
 		contentPane = new JPanel();
@@ -77,16 +81,22 @@ public class TelaAluno extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Gustavo Nunes\\Desktop\\BancoPOO\\estutanteTela.png"));
 		
-		JLabel lblNewLabel_1 = new JLabel("Bem vindo, Aluno !");
+		JLabel lblNewLabel_1 = new JLabel("Bem vindo, " + usuario.getNome());
 		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 16));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		
-		JLabel lblNewLabel_2 = new JLabel("Nome do Curso");
+		String nomeCurso;
+		if(aluno.getIdCurso() == 1) {
+			nomeCurso = "Ensino Fundamental";
+		} else 
+			nomeCurso = "Ensino Medio";
+		
+		JLabel lblNewLabel_2 = new JLabel(nomeCurso);
 		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 14));
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		
-		JLabel lblNewLabel_3 = new JLabel("Numero da matricula");
+		JLabel lblNewLabel_3 = new JLabel("Matricula: " + String.valueOf(aluno.getMatricula()));
 		lblNewLabel_3.setForeground(new Color(255, 255, 255));
 		lblNewLabel_3.setFont(new Font("Arial", Font.BOLD, 14));
 		
@@ -102,7 +112,7 @@ public class TelaAluno extends JFrame {
 		btnNewButton.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
-		        UsuarioDAO userDao = new UsuarioDAO();
+		        UsuarioDAO userDao = new UsuarioDAO();		
 		        usuario.setId_usuario(userDao.buscarIdUsuario(usuario));
 		        int resposta = JOptionPane.showConfirmDialog(null, "Você tem certeza que deseja deletar o usuário?", "Confirmação", JOptionPane.YES_NO_OPTION);
 		        if (resposta == JOptionPane.YES_OPTION) {
