@@ -161,9 +161,9 @@ public class TelaCadastrarAluno extends JFrame {
 				Curso curso = new Curso();
 				
 				if(comboBox.getSelectedItem() == "Ensino Fundamental") {
-					curso.setNomeCurso( NomeCurso.EnsinoFundamental);
+					curso.setNomeCurso(NomeCurso.EnsinoFundamental);
 				} else
-					curso.setNomeCurso( NomeCurso.EnsinoMedio);
+					curso.setNomeCurso(NomeCurso.EnsinoMedio);
 				
 				Aluno aluno = new Aluno(1,
 										cpf_usuario.getText(),

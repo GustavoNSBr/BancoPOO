@@ -5,6 +5,7 @@ import model.Professor;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
 
 import config.ConnectionBD;
 
@@ -24,15 +25,33 @@ public class ProfessorDAO implements IDao<Professor>
 			if (conexao == null)
 				return false;
 			
-			String sql = "INSERT INTO professor (formacao_professor, fk_id_usuario)";
-			sql = sql.concat("VALUES (?, ?)");
+			String sqlProfessor = "INSERT INTO professor (formacao_professor, fk_id_usuario) VALUES (?, ?)";
+			String sqlPertence = "INSERT INTO Pertence (fk_id_departamento, fk_id_professor, fk_id_usuario) VALUES (?, ?, ?)";
 			
-			PreparedStatement ps = conexao.prepareStatement(sql);
-			ps.setString(1, professor.getFormacao());
-			ps.setInt(2, professor.getId_usuario());
+			PreparedStatement psProfessor = conexao.prepareStatement(sqlProfessor, Statement.RETURN_GENERATED_KEYS);
+			psProfessor.setString(1, professor.getFormacao());
+			psProfessor.setInt(2, professor.getId_usuario());
 			
-			int linhasAfetadas = ps.executeUpdate();
+			int linhasAfetadas = psProfessor.executeUpdate();
 			
+			if(linhasAfetadas > 0) {
+				
+				ResultSet generatedKeys = psProfessor.getGeneratedKeys();
+	            int idProfessor = 0;
+	            if (generatedKeys.next()) {
+	                idProfessor = generatedKeys.getInt(1); // Obtém o ID gerado
+	            }
+	            
+				PreparedStatement psPertence = conexao.prepareStatement(sqlPertence);
+				psPertence.setInt(1, professor.getDep().getCodigo());
+				psPertence.setInt(2, idProfessor);
+				psPertence.setInt(3, professor.getId_usuario());
+				
+				int linhasPertenceAfetadas = psPertence.executeUpdate();
+	            if (linhasPertenceAfetadas <= 0) {
+	                System.out.println("Nenhuma linha inserida na tabela Pertence.");
+	            }
+			}
 			if (!ConnectionBD.desconectar(conexao))
 				System.out.println("FALHA: Conexão não fechada em ProfessorDao (criar)");
 			

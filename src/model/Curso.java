@@ -3,22 +3,14 @@ package model;
 public class Curso {
 	
     private int codigo;
-	private String[] curso = {"Ensino Fundamental", "Ensino Medio"};
 	private NomeCurso nomeCurso;
-	private SiglaCurso sigla;
     public enum NomeCurso{
     	EnsinoMedio,
     	EnsinoFundamental;
     }
-    public enum SiglaCurso{
-    	EM,
-    	EF
-    }
 
-    public Curso(int codigo, String[] curso, SiglaCurso sigla) {
+    public Curso(int codigo) {
         this.codigo = codigo;
-        this.curso = curso;
-        this.sigla = sigla;
     }
     
     public Curso() {
@@ -39,22 +31,6 @@ public class Curso {
         this.codigo = codigo;
     }
 
-	public String[] getCurso() {
-		return curso;
-	}
-
-	public void setCurso(String[] curso) {
-		this.curso = curso;
-	}
-
-	public SiglaCurso getSigla() {
-		return sigla;
-	}
-
-	public void setSigla(SiglaCurso sigla) {
-		this.sigla = sigla;
-	}
-
 	public NomeCurso getNomeCurso() {
 		return nomeCurso;
 	}
@@ -63,5 +39,4 @@ public class Curso {
 		this.nomeCurso = nomeCurso;
 	}
 
-	
 }
