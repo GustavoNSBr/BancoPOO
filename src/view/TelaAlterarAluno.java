@@ -46,25 +46,6 @@ public class TelaAlterarAluno extends JFrame {
 	private JTextField data_nacsimento_aluno;
 	private Usuario usuario;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaAlterarAluno frame = new TelaAlterarAluno();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaAlterarAluno(Usuario usuario) {
 		this.usuario = usuario;
 		initialize();

@@ -33,25 +33,6 @@ public class TelaProfessor extends JFrame {
 	private Usuario usuario;
 	private Professor professor;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaProfessor frame = new TelaProfessor();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaProfessor(Usuario usuario, Professor professor) {
 		this.usuario = usuario;
 		this.professor = professor;

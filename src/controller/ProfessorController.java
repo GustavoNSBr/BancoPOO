@@ -149,38 +149,6 @@ public class ProfessorController  {
         return res;
     }
 
-    public Resposta deletarProfessor(Professor professor) {
-    	Resposta validacao = validarProfessor(professor);
-        
-        if (!validacao.isOk())
-        	return validacao;
-        
-        Resposta res = new Resposta();
-        
-        UsuarioDAO usuarioDao = new UsuarioDAO();
-        
-        int id = usuarioDao.buscarIdUsuario(professor);
-        
-        if (id == -1)
-        {
-        	res.setMensagem("Não foi possível encontrar o usuário");
-        	return res;
-        }
-        
-        professor.setId_usuario(id);
-       
-        if(!profDao.deletar(professor))
-        {
-        	res.setMensagem("Não foi possível deletar o professor");
-        	return res;
-        }
-        
-        usuarioDao.deletar(professor);
-        System.out.println("Professor deletado com sucesso");
-        res.setOk(true);
-        return res;
-    }
-
     public Resposta alterarProfessor(int id, Professor novoProfessor) {
         Resposta validacao = validarProfessor(novoProfessor);
         

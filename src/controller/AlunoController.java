@@ -162,38 +162,6 @@ public class AlunoController  {
         return res;
     }
 
-    public Resposta deletarAluno(Aluno aluno) {
-    	Resposta validacao = validarAluno(aluno);
-        
-        if (!validacao.isOk())
-        	return validacao;
-        
-        Resposta res = new Resposta();
-        
-        UsuarioDAO usuarioDao = new UsuarioDAO();
-        
-        int id = usuarioDao.buscarIdUsuario(aluno);
-        
-        if (id == -1)
-        {
-        	res.setMensagem("Não foi possível encontrar o usuário");
-        	return res;
-        }
-        
-        aluno.setId_usuario(id);
-       
-        if(!alunoDao.deletar(aluno))
-        {
-        	res.setMensagem("Não foi possível deletar o aluno");
-        	return res;
-        }
-        
-        usuarioDao.deletar(aluno);
-        System.out.println("Aluno deletado com sucesso");
-        res.setOk(true);
-        return res;
-    }
-
     public Resposta alterarAluno(int id, Aluno novoAluno) {
     	Resposta validacao = validarAluno(novoAluno);
         

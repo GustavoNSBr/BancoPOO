@@ -45,22 +45,6 @@ public class TelaCadastrarAluno extends JFrame {
 	private JTextField filiacao_aluno;
 	private JTextField data_nacsimento_aluno;
 
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastrarAluno frame = new TelaCadastrarAluno();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaCadastrarAluno() {
 		setTitle("Tela Cadastro Aluno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

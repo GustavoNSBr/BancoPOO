@@ -42,25 +42,6 @@ public class TelaAlterarProfessor extends JFrame {
 	private JTextField formacao_professor;
 	private Usuario usuario;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaAlterarProfessor frame = new TelaAlterarProfessor();
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaAlterarProfessor(Usuario usuario) {
 		this.usuario = usuario;
 		initialize();

@@ -20,8 +20,6 @@ public class Professor extends Usuario {
     	this.idDep = idDep;
     }
     
-    
-
     public int getIdDep() {
 		return idDep;
 	}

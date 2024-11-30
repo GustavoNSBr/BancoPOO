@@ -44,26 +44,7 @@ public class TelaCadastrarProfessor extends JFrame {
 	private JTextField senha;
 	private JTextField cpf_usuario;
 	private JTextField formacao_professor;
-
-	/**
-	 * Launch the application.
-	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaCadastrarProfessor frame = new TelaCadastrarProfessor();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
-
-	/**
-	 * Create the frame.
-	 */
+	
 	public TelaCadastrarProfessor() {
 		setTitle("Tela Cadastro Professor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

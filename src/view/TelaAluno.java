@@ -6,17 +6,10 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import controller.AlunoController;
-import controller.ProfessorController;
-import dao.AlunoDao;
-import dao.UsuarioDAO;
-import model.Aluno;
-import model.Curso;
-import model.Departamento;
-import model.Professor;
-import model.Usuario;
-import model.Curso.NomeCurso;
-import model.Departamento.NomeDep;
+import controller.*;
+
+import dao.*;
+import model.*;
 
 import java.awt.Color;
 import javax.swing.GroupLayout;
@@ -43,25 +36,6 @@ public class TelaAluno extends JFrame {
 	private Usuario usuario;
 	private Aluno aluno;
 
-	/**
-	 * Launch the application.
-	 */
-//	public static void main(String[] args) {
-//		EventQueue.invokeLater(new Runnable() {
-//			public void run() {
-//				try {
-//					TelaAluno frame = new TelaAluno(usuario);
-//					frame.setVisible(true);
-//				} catch (Exception e) {
-//					e.printStackTrace();
-//				}
-//			}
-//		});
-//	}
-
-	/**
-	 * Create the frame.
-	 */
 	public TelaAluno(Usuario usuario, Aluno aluno) {
 		this.usuario = usuario;
 		this.aluno = aluno;
@@ -69,6 +43,7 @@ public class TelaAluno extends JFrame {
 	}
 	 private void initialize() {
 		 
+		setTitle("Tela Aluno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 360);
 		contentPane = new JPanel();
