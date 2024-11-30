@@ -65,7 +65,7 @@ public class TelaCadastrarProfessor extends JFrame {
 	 * Create the frame.
 	 */
 	public TelaCadastrarProfessor() {
-		setTitle("Tela Cadastro Aluno");
+		setTitle("Tela Cadastro Professor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 600);
 		contentPane = new JPanel();

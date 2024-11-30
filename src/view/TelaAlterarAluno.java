@@ -71,7 +71,7 @@ public class TelaAlterarAluno extends JFrame {
 	}
 	public void initialize() {
 		
-		setTitle("Tela Cadastro Aluno");
+		setTitle("Tela Alterar Aluno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 600);
 		contentPane = new JPanel();

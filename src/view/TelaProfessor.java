@@ -59,6 +59,7 @@ public class TelaProfessor extends JFrame {
 	}
 	private void initialize() {
 		
+		setTitle("Tela Professor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 360);
 		contentPane = new JPanel();
