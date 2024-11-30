@@ -5,14 +5,22 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import dao.UsuarioDAO;
+import model.Usuario;
+
 import java.awt.Color;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+
 import javax.swing.JTable;
 import javax.swing.JButton;
 
@@ -21,27 +29,33 @@ public class TelaProfessor extends JFrame {
 	private static final long serialVersionUID = 1L;
 	private JPanel contentPane;
 	private JTable table;
+	private Usuario usuario;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaProfessor frame = new TelaProfessor();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TelaProfessor frame = new TelaProfessor();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaProfessor() {
+	public TelaProfessor(Usuario usuario) {
+		this.usuario = usuario;
+		initialize();
+	}
+	private void initialize() {
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 360);
 		contentPane = new JPanel();
@@ -71,10 +85,40 @@ public class TelaProfessor extends JFrame {
 		JButton btnNewButton = new JButton("DELETAR USUARIO");
 		btnNewButton.setForeground(new Color(0, 0, 55));
 		btnNewButton.setFont(new Font("Arial", Font.BOLD, 8));
+		btnNewButton.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		        UsuarioDAO userDao = new UsuarioDAO();
+		        usuario.setId_usuario(userDao.buscarIdUsuario(usuario));
+		        int resposta = JOptionPane.showConfirmDialog(null, "Você tem certeza que deseja deletar o usuário?", "Confirmação", JOptionPane.YES_NO_OPTION);
+		        if (resposta == JOptionPane.YES_OPTION) {
+		            if (userDao.deletar(usuario)) { // Chama o método para deletar o usuário
+		                JOptionPane.showMessageDialog(null, "Usuário deletado com sucesso!");
+		                dispose(); // Fecha a tela atual
+		            } else {
+		                JOptionPane.showMessageDialog(null, "Erro ao deletar o usuário.");
+		            }
+		        }
+		    }
+		});
 		
 		JButton btnNewButton_1 = new JButton("ALTERAR USUARIO");
 		btnNewButton_1.setForeground(new Color(0, 0, 55));
 		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 12));
+		btnNewButton.addActionListener(new ActionListener() {
+		    @Override
+		    public void actionPerformed(ActionEvent e) {
+		    	UsuarioDAO userDao = new UsuarioDAO();
+		    	usuario.setId_usuario(userDao.buscarIdUsuario(usuario));
+		    	TelaAlterarProfessor alterarProfessor = new TelaAlterarProfessor(usuario);
+		    	alterarProfessor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		    	alterarProfessor.setVisible(true);
+				
+				dispose();
+		    }
+		});
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)

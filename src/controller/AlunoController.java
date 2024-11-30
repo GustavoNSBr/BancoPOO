@@ -203,16 +203,18 @@ public class AlunoController  {
         Resposta res = new Resposta();
         
         AlunoDao alunoDao = new AlunoDao();
+        UsuarioDAO userDao = new UsuarioDAO();
 
        
         if(!alunoDao.alterar(id, novoAluno))
         {
         	res.setMensagem("Não foi possível alterar o aluno");
         	return res;
-        }
-        
+        } else {
+        userDao.alterar(id, novoAluno);
         System.out.println("Aluno alterado com sucesso");
         res.setOk(true);
         return res;
+        }
     }
 }

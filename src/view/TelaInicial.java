@@ -116,13 +116,13 @@ public class TelaInicial extends JFrame {
 				if(userDao.logarUsuario(usuario))
 				{	
 					if(userDao.getTipoUsuario(usuario) == TipoUsuario.ALUNO) {
-						TelaAluno telaAluno = new TelaAluno();
+						TelaAluno telaAluno = new TelaAluno(usuario);
 						telaAluno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						telaAluno.setVisible(true);
 						
 						dispose();
 					} else {
-						TelaProfessor telaProfessor = new TelaProfessor();
+						TelaProfessor telaProfessor = new TelaProfessor(usuario);
 						telaProfessor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 						telaProfessor.setVisible(true);
 						

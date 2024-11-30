@@ -5,17 +5,30 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.ProfessorController;
+import model.Departamento;
+import model.Professor;
+import model.Usuario;
+import model.Departamento.NomeDep;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.SQLException;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
 import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.DefaultComboBoxModel;
 
 public class TelaAlterarProfessor extends JFrame {
 
@@ -27,29 +40,34 @@ public class TelaAlterarProfessor extends JFrame {
 	private JTextField senha;
 	private JTextField cpf_usuario;
 	private JTextField formacao_professor;
-	private JTextField denominacao_departamento;
+	private Usuario usuario;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaAlterarProfessor frame = new TelaAlterarProfessor();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TelaAlterarProfessor frame = new TelaAlterarProfessor();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaAlterarProfessor() {
-		setTitle("Tela Cadastro Aluno");
+	public TelaAlterarProfessor(Usuario usuario) {
+		this.usuario = usuario;
+		initialize();
+	}
+	public void initialize() {
+		
+		setTitle("Tela Alterar Professor");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 600);
 		contentPane = new JPanel();
@@ -121,19 +139,64 @@ public class TelaAlterarProfessor extends JFrame {
 		formacao_professor.setText("Formacao");
 		formacao_professor.setColumns(10);
 		
-		JLabel lblNewLabel_8 = new JLabel("Digite o Departamento:");
+		JLabel lblNewLabel_8 = new JLabel("Selecione o Departamento:");
 		lblNewLabel_8.setFont(new Font("Arial", Font.BOLD, 12));
 		
-		denominacao_departamento = new JTextField();
-		denominacao_departamento.setForeground(new Color(182, 182, 182));
-		denominacao_departamento.setFont(new Font("Arial", Font.PLAIN, 12));
-		denominacao_departamento.setText("Departamento");
-		denominacao_departamento.setColumns(10);
+		JComboBox comboBox = new JComboBox();
+		comboBox.setModel(new DefaultComboBoxModel(new String[] {"Matematica", "Lingua Portuguesa", "Ciencias", "Historia"}));
 		
 		JButton btnNewButton = new JButton("ALTERAR");
 		btnNewButton.setBackground(new Color(0, 0, 128));
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setFont(new Font("Arial", Font.BOLD, 18));
+btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Departamento dep = new Departamento();
+				
+				if(comboBox.getSelectedItem() == "Matematica") {
+					dep.setNomeDep(NomeDep.Matematica);
+				} else if(comboBox.getSelectedItem() == "Ciencias") {
+					dep.setNomeDep(NomeDep.Ciencias);
+				} else if(comboBox.getSelectedItem() == "Lingua Portuguesa") {
+					dep.setNomeDep(NomeDep.LinguaPortuguesa);
+				} else 
+					dep.setNomeDep(NomeDep.Historia);
+				
+				Professor professor = new Professor(usuario.getId_usuario(),
+										telefone_usuario.getText(),
+										cpf_usuario.getText(),
+										formacao_professor.getText(),
+										nome_usuario.getText(),
+										endereco_usuario.getText(),
+										1,
+										senha.getText(),
+										dep);
+				
+				try {
+					ProfessorController profCont = new ProfessorController();
+					profCont.alterarProfessor(usuario.getId_usuario(), professor);
+					JOptionPane.showMessageDialog(null, profCont.buscarProfessor(professor).getMensagem());
+					if(profCont.buscarProfessor(professor).getMensagem() == "Sucesso!") {
+						TelaInicial inicio = new TelaInicial();
+						inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						inicio.setSize(450,450);
+						inicio.setVisible(true);
+						
+						dispose();
+					}
+					System.out.println(profCont.buscarProfessor(professor).getMensagem());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				
+				
+			}
+		});
+		
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)
@@ -156,12 +219,13 @@ public class TelaAlterarProfessor extends JFrame {
 						.addComponent(cpf_usuario, GroupLayout.PREFERRED_SIZE, 217, GroupLayout.PREFERRED_SIZE)
 						.addComponent(lblNewLabel_7, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
 						.addComponent(formacao_professor, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
-						.addComponent(lblNewLabel_8, GroupLayout.PREFERRED_SIZE, 216, GroupLayout.PREFERRED_SIZE)
-						.addComponent(denominacao_departamento, GroupLayout.PREFERRED_SIZE, 218, GroupLayout.PREFERRED_SIZE)
 						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
 							.addComponent(endereco_usuario, Alignment.LEADING)
-							.addComponent(lblNewLabel_4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)))
-					.addContainerGap(GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+							.addComponent(lblNewLabel_4, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE))
+						.addGroup(gl_contentPane.createParallelGroup(Alignment.TRAILING, false)
+							.addComponent(comboBox, Alignment.LEADING, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+							.addComponent(lblNewLabel_8, Alignment.LEADING, GroupLayout.DEFAULT_SIZE, 216, Short.MAX_VALUE)))
+					.addContainerGap(34, Short.MAX_VALUE))
 				.addGroup(gl_contentPane.createSequentialGroup()
 					.addContainerGap(159, Short.MAX_VALUE)
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)
@@ -202,8 +266,8 @@ public class TelaAlterarProfessor extends JFrame {
 					.addPreferredGap(ComponentPlacement.UNRELATED)
 					.addComponent(lblNewLabel_8, GroupLayout.PREFERRED_SIZE, 21, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
-					.addComponent(denominacao_departamento, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 75, Short.MAX_VALUE)
+					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
+					.addPreferredGap(ComponentPlacement.RELATED, 71, Short.MAX_VALUE)
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
 					.addGap(29))
 		);

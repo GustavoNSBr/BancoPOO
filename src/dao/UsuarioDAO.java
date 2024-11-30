@@ -142,14 +142,15 @@ public class UsuarioDAO implements IDao<Usuario>
 			if (conexao == null)
 				return false;
 			
-			String sql = "UPDATE usuario SET nome_usuario = ?, endereco_usuario = ?, telefone_usuario = ?, senha = ? WHERE id_usuario = ?";
+			String sql = "UPDATE usuario SET nome_usuario = ?, endereco_usuario = ?, telefone_usuario = ?, senha = ?, cpf_usuario = ? WHERE id_usuario = ?";
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, novoUsuario.getNome());
 			ps.setString(2, novoUsuario.getEndereco());
 			ps.setString(3, novoUsuario.getTelefone());
 			ps.setString(4, novoUsuario.getSenha());
-			ps.setInt(5, id);
+			ps.setString(5, novoUsuario.getCpf_usuario());
+			ps.setInt(6, id);
 			
 			int linhasAlteradas = ps.executeUpdate();
 			

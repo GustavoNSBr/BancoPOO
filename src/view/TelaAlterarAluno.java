@@ -17,6 +17,7 @@ import model.Usuario;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -43,27 +44,33 @@ public class TelaAlterarAluno extends JFrame {
 	private JTextField cpf_usuario;
 	private JTextField filiacao_aluno;
 	private JTextField data_nacsimento_aluno;
+	private Usuario usuario;
 
 	/**
 	 * Launch the application.
 	 */
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					TelaAlterarAluno frame = new TelaAlterarAluno();
-					frame.setVisible(true);
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
-	}
+//	public static void main(String[] args) {
+//		EventQueue.invokeLater(new Runnable() {
+//			public void run() {
+//				try {
+//					TelaAlterarAluno frame = new TelaAlterarAluno();
+//					frame.setVisible(true);
+//				} catch (Exception e) {
+//					e.printStackTrace();
+//				}
+//			}
+//		});
+//	}
 
 	/**
 	 * Create the frame.
 	 */
-	public TelaAlterarAluno() {
+	public TelaAlterarAluno(Usuario usuario) {
+		this.usuario = usuario;
+		initialize();
+	}
+	public void initialize() {
+		
 		setTitle("Tela Cadastro Aluno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 600);
@@ -163,13 +170,13 @@ public class TelaAlterarAluno extends JFrame {
 				Curso curso = new Curso();
 				
 				if(comboBox.getSelectedItem() == "Ensino Fundamental") {
-					curso.setNomeCurso( NomeCurso.EnsinoFundamental);
+					curso.setNomeCurso(NomeCurso.EnsinoFundamental);
 				} else
-					curso.setNomeCurso( NomeCurso.EnsinoMedio);
+					curso.setNomeCurso(NomeCurso.EnsinoMedio);
 				
 				Aluno aluno = new Aluno(1,
 										cpf_usuario.getText(),
-										1,
+										usuario.getId_usuario(),
 										Date.valueOf(filiacao_aluno.getText()),
 										Date.valueOf(data_nacsimento_aluno.getText()),
 										nome_usuario.getText(),
@@ -180,13 +187,21 @@ public class TelaAlterarAluno extends JFrame {
 				
 				try {
 					AlunoController alunoCont = new AlunoController();
-					alunoCont.cadastrarAluno(aluno);
+					alunoCont.alterarAluno(usuario.getId_usuario(), aluno);
+					JOptionPane.showMessageDialog(null, alunoCont.buscarAluno(aluno).getMensagem());
+					if(alunoCont.buscarAluno(aluno).getMensagem() == "Sucesso!") {
+						TelaInicial inicio = new TelaInicial();
+						inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						inicio.setSize(450,450);
+						inicio.setVisible(true);
+						
+						dispose();
+					}
 					System.out.println(alunoCont.buscarAluno(aluno).getMensagem());
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}	
-				
 				
 			}
 		});

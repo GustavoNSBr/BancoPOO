@@ -190,16 +190,19 @@ public class ProfessorController  {
         Resposta res = new Resposta();
         
         ProfessorDAO professorDao = new ProfessorDAO();
+        UsuarioDAO userDao = new UsuarioDAO();
 
        
         if(!professorDao.alterar(id, novoProfessor))
         {
         	res.setMensagem("Não foi possível alterar o professor");
         	return res;
-        }
+        } else {
         
+        userDao.alterar(id, novoProfessor);
         System.out.println("Professor alterado com sucesso");
         res.setOk(true);
         return res;
+        }
     }
 }
