@@ -5,6 +5,10 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import dao.UsuarioDAO;
+import model.Usuario;
+
 import java.awt.Color;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
@@ -57,6 +61,12 @@ public class TelaUsuario extends JFrame {
 		btnCadastrarProfessor.setFont(new Font("Arial", Font.BOLD, 16));
 		btnCadastrarProfessor.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				TelaCadastrarProfessor loginProfessor = new TelaCadastrarProfessor();
+				loginProfessor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				loginProfessor.setSize(310,600);
+				loginProfessor.setVisible(true);
+				
+				dispose();
 			}
 		});
 		
@@ -64,6 +74,18 @@ public class TelaUsuario extends JFrame {
 		btnCadastrarAluno.setBackground(new Color(0, 0, 128));
 		btnCadastrarAluno.setForeground(new Color(255, 255, 255));
 		btnCadastrarAluno.setFont(new Font("Arial", Font.BOLD, 16));
+		btnCadastrarAluno.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			TelaCadastrarAluno loginAluno = new TelaCadastrarAluno();
+			loginAluno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+			loginAluno.setSize(310,600);
+			loginAluno.setVisible(true);
+			
+			dispose();
+			
+			}
+		});
+
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);

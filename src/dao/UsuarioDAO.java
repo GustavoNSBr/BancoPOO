@@ -24,8 +24,8 @@ public class UsuarioDAO implements IDao<Usuario>
 			
 			if (conexao == null)
 				return false;
-			String sql = "INSERT INTO usuario (nome_usuario, endereco_usuario, telefone_usuario, senha, cpf_usuario)";
-			sql = sql.concat("VALUES (?, ?, ?, ?, ?)");
+			String sql = "INSERT INTO usuario (nome_usuario, endereco_usuario, telefone_usuario, senha, cpf_usuario, tipo_usuario)";
+			sql = sql.concat("VALUES (?, ?, ?, ?, ?, ?)");
 			
 			PreparedStatement ps = conexao.prepareStatement(sql);
 			ps.setString(1, usuario.getNome());
@@ -33,6 +33,7 @@ public class UsuarioDAO implements IDao<Usuario>
 			ps.setString(3, usuario.getTelefone());
 			ps.setString(4, usuario.getSenha());
 			ps.setString(5, usuario.getCpf_usuario());
+			ps.setString(6, usuario.getTipoUsuario().name());
 			
 			int linhasAfetadas = ps.executeUpdate();
 			

@@ -77,6 +77,7 @@ public class ProfessorController  {
         Resposta res = new Resposta();
         
         Usuario usuario = professor;
+        usuario.setTipoUsuario(TipoUsuario.PROFESSOR);
         UsuarioDAO usuarioDao = new UsuarioDAO();
         
         if (!usuarioDao.criar(usuario))

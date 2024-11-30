@@ -17,6 +17,7 @@ import model.Usuario;
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
@@ -44,9 +45,6 @@ public class TelaCadastrarAluno extends JFrame {
 	private JTextField filiacao_aluno;
 	private JTextField data_nacsimento_aluno;
 
-	/**
-	 * Launch the application.
-	 */
 	public static void main(String[] args) {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
@@ -66,7 +64,7 @@ public class TelaCadastrarAluno extends JFrame {
 	public TelaCadastrarAluno() {
 		setTitle("Tela Cadastro Aluno");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setBounds(100, 100, 450, 600);
+		setBounds(100, 100, 371, 600);
 		contentPane = new JPanel();
 		contentPane.setBackground(new Color(215, 255, 255));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -181,12 +179,20 @@ public class TelaCadastrarAluno extends JFrame {
 				try {
 					AlunoController alunoCont = new AlunoController();
 					alunoCont.cadastrarAluno(aluno);
+					JOptionPane.showMessageDialog(null, alunoCont.buscarAluno(aluno).getMensagem());
+					if(alunoCont.buscarAluno(aluno).getMensagem() == "Sucesso!") {
+						TelaInicial inicio = new TelaInicial();
+						inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						inicio.setSize(450,450);
+						inicio.setVisible(true);
+						
+						dispose();
+					}
 					System.out.println(alunoCont.buscarAluno(aluno).getMensagem());
 				} catch (SQLException e1) {
 					// TODO Auto-generated catch block
 					e1.printStackTrace();
 				}	
-				
 				
 			}
 		});
@@ -219,18 +225,17 @@ public class TelaCadastrarAluno extends JFrame {
 										.addComponent(lblNewLabel_1, GroupLayout.DEFAULT_SIZE, 219, Short.MAX_VALUE)
 										.addComponent(lblNewLabel_2, GroupLayout.DEFAULT_SIZE, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
 									.addGap(105)
-									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE)
-									.addGap(64))))
-						.addGroup(gl_contentPane.createSequentialGroup()
-							.addGap(145)
-							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE))
+									.addComponent(lblNewLabel, GroupLayout.PREFERRED_SIZE, 80, GroupLayout.PREFERRED_SIZE))))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
 							.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 219, GroupLayout.PREFERRED_SIZE))
 						.addGroup(gl_contentPane.createSequentialGroup()
 							.addContainerGap()
-							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE)))
-					.addContainerGap(180, Short.MAX_VALUE))
+							.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, 155, GroupLayout.PREFERRED_SIZE))
+						.addGroup(gl_contentPane.createSequentialGroup()
+							.addGap(37)
+							.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 169, GroupLayout.PREFERRED_SIZE)))
+					.addContainerGap(244, Short.MAX_VALUE))
 		);
 		gl_contentPane.setVerticalGroup(
 			gl_contentPane.createParallelGroup(Alignment.LEADING)
@@ -272,9 +277,9 @@ public class TelaCadastrarAluno extends JFrame {
 					.addComponent(lblNewLabel_2_1, GroupLayout.PREFERRED_SIZE, 18, GroupLayout.PREFERRED_SIZE)
 					.addPreferredGap(ComponentPlacement.RELATED)
 					.addComponent(comboBox, GroupLayout.PREFERRED_SIZE, GroupLayout.DEFAULT_SIZE, GroupLayout.PREFERRED_SIZE)
-					.addPreferredGap(ComponentPlacement.RELATED, 30, Short.MAX_VALUE)
+					.addPreferredGap(ComponentPlacement.RELATED, 38, Short.MAX_VALUE)
 					.addComponent(btnNewButton, GroupLayout.PREFERRED_SIZE, 41, GroupLayout.PREFERRED_SIZE)
-					.addGap(19))
+					.addContainerGap())
 		);
 		contentPane.setLayout(gl_contentPane);
 	}

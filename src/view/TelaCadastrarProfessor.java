@@ -5,13 +5,26 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import controller.AlunoController;
+import controller.ProfessorController;
+import model.Aluno;
+import model.Curso;
+import model.Curso.NomeCurso;
+import model.Professor;
+
 import javax.swing.GroupLayout;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.SwingConstants;
 import javax.swing.LayoutStyle.ComponentPlacement;
 import java.awt.Font;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.sql.SQLException;
 import java.awt.Color;
 import javax.swing.JTextField;
 import javax.swing.JTextPane;
@@ -134,6 +147,43 @@ public class TelaCadastrarProfessor extends JFrame {
 		btnNewButton.setBackground(new Color(0, 0, 128));
 		btnNewButton.setForeground(new Color(255, 255, 255));
 		btnNewButton.setFont(new Font("Arial", Font.BOLD, 18));
+		
+		btnNewButton.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				
+				Professor professor = new Professor(1,
+										telefone_usuario.getText(),
+										cpf_usuario.getText(),
+										formacao_professor.getText(),
+										nome_usuario.getText(),
+										endereco_usuario.getText(),
+										1,
+										senha.getText());
+				
+				try {
+					ProfessorController profCont = new ProfessorController();
+					profCont.cadastrarProfessor(professor);
+					JOptionPane.showMessageDialog(null, profCont.buscarProfessor(professor).getMensagem());
+					if(profCont.buscarProfessor(professor).getMensagem() == "Sucesso!") {
+						TelaInicial inicio = new TelaInicial();
+						inicio.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						inicio.setSize(450,450);
+						inicio.setVisible(true);
+						
+						dispose();
+					}
+					System.out.println(profCont.buscarProfessor(professor).getMensagem());
+				} catch (SQLException e1) {
+					// TODO Auto-generated catch block
+					e1.printStackTrace();
+				}	
+				
+				
+			}
+		});
+		
 		GroupLayout gl_contentPane = new GroupLayout(contentPane);
 		gl_contentPane.setHorizontalGroup(
 			gl_contentPane.createParallelGroup(Alignment.TRAILING)

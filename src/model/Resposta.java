@@ -8,7 +8,7 @@ public class Resposta {
 	public Resposta()
 	{
 		ok = false;
-		mensagem = "";
+		mensagem = "Sucesso!";
 	}
 	
 	public boolean isOk() {

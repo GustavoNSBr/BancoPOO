@@ -88,6 +88,7 @@ public class AlunoController  {
         Resposta res = new Resposta();
         
         Usuario usuario = aluno;
+        usuario.setTipoUsuario(TipoUsuario.ALUNO);
         UsuarioDAO usuarioDao = new UsuarioDAO();
         
         if (!usuarioDao.criar(usuario))

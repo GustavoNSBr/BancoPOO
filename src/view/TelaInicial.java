@@ -5,6 +5,11 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import dao.UsuarioDAO;
+import model.TipoUsuario;
+import model.Usuario;
+
 import java.awt.GridLayout;
 import javax.swing.JLabel;
 import javax.swing.BoxLayout;
@@ -68,6 +73,17 @@ public class TelaInicial extends JFrame {
 		btnCadastrar.setFont(new Font("Arial", Font.BOLD, 12));
 		btnCadastrar.setForeground(new Color(0, 0, 255));
 		btnCadastrar.setBackground(new Color(255, 255, 255));
+		btnCadastrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				TelaUsuario telaUsuario = new TelaUsuario();
+				telaUsuario.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				telaUsuario.setVisible(true);
+				
+				dispose();
+			}
+		});
 		
 		JLabel lblNewLabel = new JLabel("");
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
@@ -91,6 +107,31 @@ public class TelaInicial extends JFrame {
 		txtSenha.setColumns(10);
 		
 		JButton btnEntrar = new JButton("ENTRAR");
+		btnEntrar.addActionListener(new ActionListener() {
+			
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				Usuario usuario = new Usuario(txtCPF.getText(), txtSenha.getText());
+				UsuarioDAO userDao = new UsuarioDAO();
+				if(userDao.logarUsuario(usuario))
+				{	
+					if(userDao.getTipoUsuario(usuario) == TipoUsuario.ALUNO) {
+						TelaAluno telaAluno = new TelaAluno();
+						telaAluno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						telaAluno.setVisible(true);
+						
+						dispose();
+					} else {
+						TelaProfessor telaProfessor = new TelaProfessor();
+						telaProfessor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+						telaProfessor.setVisible(true);
+						
+						dispose();
+					}
+					
+				}
+			}
+		});
 		btnEntrar.setBackground(new Color(255, 255, 255));
 		btnEntrar.setFont(new Font("Arial", Font.BOLD, 18));
 		btnEntrar.setForeground(new Color(0, 0, 255));
