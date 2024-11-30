@@ -6,11 +6,8 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
-import dao.AlunoDao;
-import dao.UsuarioDAO;
-import model.Aluno;
-import model.TipoUsuario;
-import model.Usuario;
+import dao.*;
+import model.*;
 
 import java.awt.GridLayout;
 import javax.swing.JLabel;
@@ -121,6 +118,8 @@ public class TelaInicial extends JFrame {
 			    if (usuario != null) {
 			        AlunoDao alunoDao = new AlunoDao();
 			        Aluno aluno = alunoDao.getDadosAluno(usuario);
+			        ProfessorDAO profDao = new ProfessorDAO();
+			        Professor prof = profDao.getDadosProfessor(usuario);
 			        
 			        if (userDao.getTipoUsuario(usuario) == TipoUsuario.ALUNO) {
 			            TelaAluno telaAluno = new TelaAluno(usuario, aluno);
@@ -128,7 +127,7 @@ public class TelaInicial extends JFrame {
 			            telaAluno.setVisible(true);
 			            dispose();
 			        } else {
-			            TelaProfessor telaProfessor = new TelaProfessor(usuario);
+			            TelaProfessor telaProfessor = new TelaProfessor(usuario, prof);
 			            telaProfessor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			            telaProfessor.setVisible(true);
 			            dispose();

@@ -25,7 +25,6 @@ public class Aluno extends Usuario {
         this.idCurso = idCurso;
     }
     
-    
     public int getIdCurso() {
 		return idCurso;
 	}

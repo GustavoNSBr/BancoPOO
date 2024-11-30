@@ -7,6 +7,7 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import dao.UsuarioDAO;
+import model.Professor;
 import model.Usuario;
 
 import java.awt.Color;
@@ -30,6 +31,7 @@ public class TelaProfessor extends JFrame {
 	private JPanel contentPane;
 	private JTable table;
 	private Usuario usuario;
+	private Professor professor;
 
 	/**
 	 * Launch the application.
@@ -50,8 +52,9 @@ public class TelaProfessor extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public TelaProfessor(Usuario usuario) {
+	public TelaProfessor(Usuario usuario, Professor professor) {
 		this.usuario = usuario;
+		this.professor = professor;
 		initialize();
 	}
 	private void initialize() {
@@ -68,12 +71,22 @@ public class TelaProfessor extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Gustavo Nunes\\Desktop\\BancoPOO\\professorTela.png"));
 		
-		JLabel lblNewLabel_1 = new JLabel("Bem vindo, Professor !");
+		JLabel lblNewLabel_1 = new JLabel("Bem vindo, " + usuario.getNome());
 		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 16));
 		lblNewLabel_1.setHorizontalAlignment(SwingConstants.LEFT);
 		lblNewLabel_1.setForeground(new Color(255, 255, 255));
 		
-		JLabel lblNewLabel_2 = new JLabel("Nome do Departamento");
+		String nomeDepartamento = null;
+		if(professor.getIdDep() == 1)
+			nomeDepartamento = "Matematica";
+		else if (professor.getIdDep() == 2)
+			nomeDepartamento = "Ciencias";
+		else if(professor.getIdDep() == 3)
+			nomeDepartamento = "Lingua Portuguesa";
+		else
+			nomeDepartamento = "Historia";
+		
+		JLabel lblNewLabel_2 = new JLabel(nomeDepartamento);
 		lblNewLabel_2.setFont(new Font("Arial", Font.BOLD, 14));
 		lblNewLabel_2.setForeground(new Color(255, 255, 255));
 		

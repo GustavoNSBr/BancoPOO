@@ -11,9 +11,8 @@ public class Departamento {
     	Historia;
     }
 
-    public Departamento(int codigo, String denominacao) {
+    public Departamento(int codigo) {
         this.codigo = codigo;
-        this.denominacao = denominacao;
     }
     
     public Departamento() {
@@ -29,8 +28,6 @@ public class Departamento {
     		this.codigo = 3;
     	else if(nomeDep == NomeDep.Historia)
     		this.codigo = 4;
-    	else 
-    		this.codigo = 0;
         return codigo;
     }
 

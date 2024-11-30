@@ -1,6 +1,9 @@
 package dao;
 
+import model.Aluno;
+import model.Departamento;
 import model.Professor;
+import model.Usuario;
 
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
@@ -67,6 +70,67 @@ public class ProfessorDAO implements IDao<Professor>
 			
 			return false;
 		}
+	}
+	
+	public Departamento getDadosDep(Usuario usuario) {
+
+		Departamento dep = null;
+	    try {
+	        conexao = ConnectionBD.conectar();
+	        if (conexao == null) 
+	        	return null;
+
+	        String sql = "SELECT * FROM Pertence WHERE fk_id_usuario = ?";
+	        PreparedStatement ps = conexao.prepareStatement(sql);
+	        ps.setInt(1, usuario.getId_usuario());
+	        
+	        ResultSet rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	           dep = new Departamento(
+	                rs.getInt("fk_id_departamento")
+	            );
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Erro ao buscar detalhes do departamento: " + e.getMessage());
+	    } finally {
+	        if (conexao != null) {
+	            ConnectionBD.desconectar(conexao);
+	        }
+	    }
+	    return dep;
+	}
+	
+	
+	public Professor getDadosProfessor(Usuario usuario) {
+
+		Professor professor = null;
+		Departamento dep = getDadosDep(usuario);
+		try {
+	        conexao = ConnectionBD.conectar();
+	        if (conexao == null) 
+	        	return null;
+
+	        String sql = "SELECT * FROM professor WHERE fk_id_usuario = ?";
+	        PreparedStatement ps = conexao.prepareStatement(sql);
+	        ps.setInt(1, usuario.getId_usuario());
+	        
+	        ResultSet rs = ps.executeQuery();
+	        
+	        if (rs.next()) {
+	           professor = new Professor(
+	                rs.getInt("id_professor"),
+	                rs.getString("formacao_professor"),
+	                dep.getCodigo());
+	        }
+	    } catch (SQLException e) {
+	        System.out.println("Erro ao buscar detalhes do professor: " + e.getMessage());
+	    } finally {
+	        if (conexao != null) {
+	            ConnectionBD.desconectar(conexao);
+	        }
+	    }
+	    return professor;
 	}
 	
 	@Override
