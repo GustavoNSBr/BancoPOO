@@ -62,7 +62,7 @@ public class TelaCadastrarProfessor extends JFrame {
 		lblNewLabel.setHorizontalAlignment(SwingConstants.CENTER);
 		lblNewLabel.setIcon(new ImageIcon("C:\\Users\\Gustavo Nunes\\Desktop\\BancoPOO\\professorTela.png"));
 		
-		JLabel lblNewLabel_1 = new JLabel("Cadastro de novo aluno");
+		JLabel lblNewLabel_1 = new JLabel("Cadastro de novo professor");
 		lblNewLabel_1.setBackground(new Color(255, 255, 255));
 		lblNewLabel_1.setFont(new Font("Arial", Font.BOLD, 18));
 		

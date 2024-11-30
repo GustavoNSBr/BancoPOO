@@ -3,18 +3,19 @@ package model;
 public class Curso {
 	
     private int codigo;
-	private NomeCurso curso;
+	private String[] curso = {"Ensino Fundamental", "Ensino Medio"};
+	private NomeCurso nomeCurso;
 	private SiglaCurso sigla;
     public enum NomeCurso{
     	EnsinoMedio,
-    	EnsinoFundamental
+    	EnsinoFundamental;
     }
     public enum SiglaCurso{
     	EM,
     	EF
     }
 
-    public Curso(int codigo, NomeCurso curso, SiglaCurso sigla) {
+    public Curso(int codigo, String[] curso, SiglaCurso sigla) {
         this.codigo = codigo;
         this.curso = curso;
         this.sigla = sigla;
@@ -25,6 +26,12 @@ public class Curso {
     }
 
     public int getCodigo() {
+    	if(nomeCurso == NomeCurso.EnsinoFundamental)
+    		this.codigo = 1;
+    	else if(nomeCurso == NomeCurso.EnsinoMedio)
+    		this.codigo = 2;
+    	else 
+    		this.codigo = 0;
         return codigo;
     }
 
@@ -32,11 +39,11 @@ public class Curso {
         this.codigo = codigo;
     }
 
-	public NomeCurso getCurso() {
+	public String[] getCurso() {
 		return curso;
 	}
 
-	public void setCurso(NomeCurso curso) {
+	public void setCurso(String[] curso) {
 		this.curso = curso;
 	}
 
@@ -48,5 +55,13 @@ public class Curso {
 		this.sigla = sigla;
 	}
 
-    
+	public NomeCurso getNomeCurso() {
+		return nomeCurso;
+	}
+
+	public void setNomeCurso(NomeCurso nomeCurso) {
+		this.nomeCurso = nomeCurso;
+	}
+
+	
 }

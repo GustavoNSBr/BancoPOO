@@ -1,6 +1,7 @@
 package model;
-
 import java.sql.Date;
+
+import model.Curso.NomeCurso;
 
 public class Aluno extends Usuario {
     private int matricula;
@@ -23,7 +24,6 @@ public class Aluno extends Usuario {
 	public void setCurso(Curso curso) {
 		this.curso = curso;
 	}
-
 
 
 	public int getMatricula() {

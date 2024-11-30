@@ -133,7 +133,8 @@ public class Janela extends JFrame
 									cpfField.getText(),
 									enderecoField.getText(),
 									telefoneField.getText(),
-									passwordField.getText());
+									passwordField.getText(),
+									comboBox.getSelectedItem());
 				if(userDAO.criar(user));
 				{
 					JOptionPane.showMessageDialog(null, "Usuário salvo com sucesso!");

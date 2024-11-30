@@ -10,14 +10,13 @@ public class Usuario {
     protected String senha;
     protected TipoUsuario tipoUsuario;
 
-    public Usuario(int id_usuario, String nome, String cpf_usuario, String endereco, String telefone, String senha, TipoUsuario tipoUsuario) {
+    public Usuario(int id_usuario, String nome, String cpf_usuario, String endereco, String telefone, String senha) {
     	this.id_usuario = id_usuario;
     	this.nome = nome;
     	this.cpf_usuario = cpf_usuario;
     	this.endereco = endereco;
     	this.telefone = telefone;
     	this.senha = senha;
-    	this.tipoUsuario = tipoUsuario;
     }
     
     public Usuario(String cpf_usuario, String senha) {
