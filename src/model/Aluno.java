@@ -1,8 +1,6 @@
 package model;
 import java.sql.Date;
 
-import model.Curso.NomeCurso;
-
 public class Aluno extends Usuario {
     private int matricula;
     private Date filiacao;

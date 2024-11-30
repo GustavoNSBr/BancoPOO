@@ -133,7 +133,7 @@ public class TelaCadastrarAluno extends JFrame {
 		filiacao_aluno = new JTextField();
 		filiacao_aluno.setForeground(new Color(182, 182, 182));
 		filiacao_aluno.setFont(new Font("Arial", Font.PLAIN, 12));
-		filiacao_aluno.setText("Data Filiacao");
+		filiacao_aluno.setText("yyyy-mm-dd");
 		filiacao_aluno.setColumns(10);
 		
 		JLabel lblNewLabel_8 = new JLabel("Data de nascimento:");
@@ -142,7 +142,7 @@ public class TelaCadastrarAluno extends JFrame {
 		data_nacsimento_aluno = new JTextField();
 		data_nacsimento_aluno.setForeground(new Color(182, 182, 182));
 		data_nacsimento_aluno.setFont(new Font("Arial", Font.PLAIN, 12));
-		data_nacsimento_aluno.setText("Data Nacimento");
+		data_nacsimento_aluno.setText("yyyy-mm-dd");
 		data_nacsimento_aluno.setColumns(10);
 		
 		JComboBox comboBox = new JComboBox();
