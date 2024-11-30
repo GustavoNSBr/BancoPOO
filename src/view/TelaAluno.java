@@ -120,7 +120,7 @@ public class TelaAluno extends JFrame {
 		JButton btnNewButton_1 = new JButton("ALTERAR USUARIO");
 		btnNewButton_1.setForeground(new Color(0, 0, 55));
 		btnNewButton_1.setFont(new Font("Arial", Font.BOLD, 12));
-		btnNewButton.addActionListener(new ActionListener() {
+		btnNewButton_1.addActionListener(new ActionListener() {
 		    @Override
 		    public void actionPerformed(ActionEvent e) {
 		    	UsuarioDAO userDao = new UsuarioDAO();
