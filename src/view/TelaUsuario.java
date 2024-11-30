@@ -63,7 +63,7 @@ public class TelaUsuario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				TelaCadastrarProfessor loginProfessor = new TelaCadastrarProfessor();
 				loginProfessor.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				loginProfessor.setSize(310,600);
+				loginProfessor.setSize(500,600);
 				loginProfessor.setVisible(true);
 				
 				dispose();
@@ -78,7 +78,7 @@ public class TelaUsuario extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 			TelaCadastrarAluno loginAluno = new TelaCadastrarAluno();
 			loginAluno.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-			loginAluno.setSize(310,600);
+			loginAluno.setSize(500,600);
 			loginAluno.setVisible(true);
 			
 			dispose();
