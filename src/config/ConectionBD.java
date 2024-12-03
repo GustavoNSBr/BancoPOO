@@ -9,8 +9,8 @@ public class ConnectionBD {
 public static Connection getConnection()
 {
 String url = "jdbc:mysql://banco-poo-projeto-poo.f.aivencloud.com:10487/mydb";
-String user = "avnadmin";
-String password = "AVNS_zu6ktRkOyym6pZD12E4";
+String user = "";
+String password = "";
 
 try {
 Class.forName("com.mysql.cj.jdbc.Driver");
